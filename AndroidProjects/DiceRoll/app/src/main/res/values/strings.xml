@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">DiceRoll</string>
+    <string name="greeting">Hello</string>
+    <string name="dice_image" translatable="false">Dice image</string>
+    <string name="roll_btn_txt">Roll</string>
+    <string name="roll_btn_ct_desc" translatable="false">roll btn</string>
+</resources>

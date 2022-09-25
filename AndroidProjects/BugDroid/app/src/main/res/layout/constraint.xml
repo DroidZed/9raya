@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/headView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:contentDescription="@string/headimg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/head"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/bodyView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/bodyimage"
+        app:layout_constraintEnd_toStartOf="@+id/rightHandView3"
+        app:layout_constraintStart_toEndOf="@+id/leftHandView3"
+        app:layout_constraintTop_toBottomOf="@+id/headView3"
+        app:srcCompat="@drawable/body"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/leftHandView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:contentDescription="@string/handimage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        app:srcCompat="@drawable/hand"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/rightHandView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="76dp"
+        android:contentDescription="@string/handimage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496"
+        app:srcCompat="@drawable/hand"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/leftlegView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/legimage"
+        app:layout_constraintEnd_toStartOf="@+id/rightLegView3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bodyView3"
+        app:srcCompat="@drawable/leg"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/rightLegView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="156dp"
+        android:contentDescription="@string/legimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bodyView3"
+        app:srcCompat="@drawable/leg"
+        tools:ignore="ImageContrastCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>

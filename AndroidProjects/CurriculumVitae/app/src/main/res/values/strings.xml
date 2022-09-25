@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Curriculum Vitae</string>
+    <string name="f_name_hint">Full name</string>
+    <string name="age_hint">Age</string>
+    <string name="email_hint">E-mail</string>
+    <string name="section_gender_title">Gender</string>
+    <string name="g_homme">Homme</string>
+    <string name="g_femme">Femme</string>
+    <string name="section_skills_title">Skills</string>
+    <string name="sk_android">ANDROID</string>
+    <string name="sk_ios">iOS</string>
+    <string name="sk_flutter">Flutter</string>
+    <string name="btn_rst_txt">RESET</string>
+    <string name="btn_nxt_txt">NEXT</string>
+    <string name="profile_image_cnt_desc">profile image</string>
+</resources>

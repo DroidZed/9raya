@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/headView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="153dp"
+        android:layout_marginEnd="0dp"
+        android:contentDescription="@string/headimg"
+        app:srcCompat="@drawable/head"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/bodyView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headView2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="4dp"
+        android:contentDescription="@string/bodyimage"
+        app:srcCompat="@drawable/body"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/leftHandView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="261dp"
+        android:layout_marginBottom="222dp"
+        android:contentDescription="@string/handimage"
+        app:srcCompat="@drawable/hand"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/rightHandView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="261dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="222dp"
+        android:contentDescription="@string/handimage"
+        app:srcCompat="@drawable/hand"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/leftLegView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="152dp"
+        android:layout_marginBottom="131dp"
+        android:contentDescription="@string/legimage"
+        app:srcCompat="@drawable/leg"
+        tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/rightLegView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="146dp"
+        android:layout_marginBottom="130dp"
+        android:contentDescription="@string/legimage"
+        app:srcCompat="@drawable/leg"
+        tools:ignore="ImageContrastCheck" />
+
+</RelativeLayout>

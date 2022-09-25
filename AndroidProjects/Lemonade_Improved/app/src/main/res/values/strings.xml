@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Lemonade</string>
+    <string name="lemon_select">Press to select a lemon!</string>
+    <string name="lemon_squeeze">Long press to juice the lemon!</string>
+    <string name="lemon_drink">Press to drink your lemonade!</string>
+    <string name="lemon_empty_glass">Press to start again!</string>
+    <string name="squeeze_count">Squeezes remaining: %1$d, keep squeezing!</string>
+    <string name="app_icon">app icon</string>
+    <string name="splash_text">splash text</string>
+    <string name="splashimageCntDesc">splashImage</string>
+</resources>
