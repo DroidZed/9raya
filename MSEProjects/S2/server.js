@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
-import { readFileSync } from 'fs';
+import { readFile } from 'fs';
 
 dotenv.config();
 
@@ -29,11 +29,15 @@ class Game {
 
 /**
  * Reads the file and returns the content as an array of Game objects
- * @returns {Promise<Game[]>}
+ * @param callback a callback function to execute the code
  */
-const getGames = async () => {
-	const games = readFileSync('SteamGames.json', 'utf8');
-	return games ? JSON.parse(games) : null;
+const getGames = async (callback) => {
+	readFile('SteamGames.json', 'utf8', (err, data) => {
+		if (err) {
+			return callback(err);
+		}
+		callback(null, JSON.parse(data));
+	});
 };
 
 const app = express();
@@ -58,34 +62,48 @@ app.get('/entity', (req, res) => {
 } );
 */
 
-app.get('/game', async (_, res) => res.json(await getGames()));
+app.get('/game', async (_, res) => {
+	await getGames((err, games) => {
+		err ? res.status(500).json({ message: err }) : res.json(games);
+	});
+});
 
 app.get('/game/select/:year', async (req, res) => {
-	const games = await getGames();
-	const gamesByYear = games.filter((game) => +req.params.year < game.Year);
-	return gamesByYear.length !== 0
-		? res.json(gamesByYear)
-		: res.status(404).json({ message: 'Not Found' });
+	await getGames((err, games) => {
+		if (err) return res.status(500).json({ message: err });
+
+		const gamesByYear = games.filter((game) => +req.params.year < game.Year);
+		return gamesByYear.length !== 0
+			? res.json(gamesByYear)
+			: res.status(404).json({ message: 'Not Found' });
+	});
 });
 
 app.get('/game/names', async (req, res) => {
-	const games = await getGames();
-	const gamesByName = games.map((game) => game.Game);
-	res.json(gamesByName);
+	await getGames((err, games) => {
+		err
+			? res.status(500).json({ message: err })
+			: res.json(games.map((game) => game.Game));
+	});
 });
 
 app.get('/game/years', async (req, res) => {
-	const games = await getGames();
-	const gamesYears = games.map((game) => game.Year);
-	res.json(gamesYears);
+	await getGames((err, games) => {
+		err
+			? res.status(500).json({ message: err })
+			: res.json(games.map((game) => game.Year));
+	});
 });
 
 app.get('/game/:name', async (req, res) => {
-	const games = await getGames();
-	const game = games.find((game) => req.params.name == game.Game);
-	game
-		? res.json(game).status(200)
-		: res.status(404).json({ message: 'Game not found' });
+	await getGames((err, games) => {
+		if (err) return res.status(500).json({ message: err });
+
+		const game = games.find((game) => req.params.name == game.Game);
+		game
+			? res.json(game).status(200)
+			: res.status(404).json({ message: 'Game not found' });
+	});
 });
 
 app.listen(PORT, hostname, () => {
