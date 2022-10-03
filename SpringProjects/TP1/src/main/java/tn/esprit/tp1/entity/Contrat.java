@@ -1,5 +1,6 @@
 package tn.esprit.tp1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,10 +21,12 @@ public class Contrat implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "id_contrat")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idContrat;
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "date_debut_contrat")
     private Date dateDebutContrat;
 
     @Temporal(TemporalType.DATE)
@@ -34,6 +37,7 @@ public class Contrat implements Serializable {
 
     private Boolean archive;
 
+    @JsonIgnore
     @ManyToOne
     private Etudiant etudiant;
 }

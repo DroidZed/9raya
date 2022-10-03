@@ -31,6 +31,9 @@ public class Equipe implements Serializable {
     @ManyToMany(mappedBy = "equipes")
     private Set<Etudiant> etudiants;
 
+    @OneToOne(mappedBy = "equipe")
+    private DetailEquipe detailEquipe;
+
     @ManyToOne
     private Etudiant etudiant;
 }
