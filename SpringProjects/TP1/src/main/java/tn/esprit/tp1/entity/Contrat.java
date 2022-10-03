@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "contrat")
-public class Contrat  implements Serializable {
+public class Contrat implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

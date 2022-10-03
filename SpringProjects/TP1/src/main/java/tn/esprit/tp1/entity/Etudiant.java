@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "etudiant")
-public class Etudiant  implements Serializable {
+public class Etudiant implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

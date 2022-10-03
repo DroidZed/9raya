@@ -14,7 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "detail_equipe")
-public class DetailEquipe  implements Serializable {
+public class DetailEquipe implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
