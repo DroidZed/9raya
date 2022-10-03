@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VSProjects\\AirportManagement\\AM.UI.Console\\AM.UI.Console.csproj",
+      "projectUniqueName": "C:\\Users\\DroidZed\\Documents\\9raya\\.NETProjects\\AirportManagement\\AM.UI.Console\\AM.UI.Console.csproj",
       "projectName": "AM.UI.Console",
-      "projectPath": "D:\\VSProjects\\AirportManagement\\AM.UI.Console\\AM.UI.Console.csproj",
+      "projectPath": "C:\\Users\\DroidZed\\Documents\\9raya\\.NETProjects\\AirportManagement\\AM.UI.Console\\AM.UI.Console.csproj",
       "packagesPath": "C:\\Users\\DroidZed\\.nuget\\packages\\",
-      "outputPath": "D:\\VSProjects\\AirportManagement\\AM.UI.Console\\obj\\",
+      "outputPath": "C:\\Users\\DroidZed\\Documents\\9raya\\.NETProjects\\AirportManagement\\AM.UI.Console\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DroidZed\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\VSProjects\\AirportManagement\\AM.ApplicationCore\\AM.ApplicationCore.csproj": {
-              "projectPath": "D:\\VSProjects\\AirportManagement\\AM.ApplicationCore\\AM.ApplicationCore.csproj"
+            "C:\\Users\\DroidZed\\Documents\\9raya\\.NETProjects\\AirportManagement\\AM.ApplicationCore\\AM.ApplicationCore.csproj": {
+              "projectPath": "C:\\Users\\DroidZed\\Documents\\9raya\\.NETProjects\\AirportManagement\\AM.ApplicationCore\\AM.ApplicationCore.csproj"
             }
           }
         }
@@ -84,7 +84,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

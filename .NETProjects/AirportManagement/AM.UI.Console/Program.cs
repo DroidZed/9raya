@@ -1,4 +1,5 @@
 ﻿using AM.ApplicationCore.Domain;
+using AM.ApplicationCore.Services;
 
 /* 
 Plane p1 = new();
@@ -41,3 +42,8 @@ s.PassengerType();
 t.PassengerType();
 
 Console.WriteLine($"The profile of passanger {pass.FirstName} is: {(pass.CheckProfile("Passenger1", "Passenger1") ? "verified" : "unverified")}");
+
+ServiceFlight sf = new ServiceFlight();
+
+sf.Flights = TestData.ListFlights;
+

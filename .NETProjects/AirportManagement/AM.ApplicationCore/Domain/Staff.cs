@@ -2,9 +2,9 @@
 {
     public class Staff: Passenger
     {
-        public DateTime EmploymentDate { get; set; }
+        public DateTime? EmploymentDate { get; set; }
 
-        public string Function { get; set; }
+        public string? Function { get; set; }
 
         public float Salary { get; set; }
 
