@@ -33,6 +33,8 @@ Traveller t = new();
 
 Console.WriteLine(p3);
 
+Console.WriteLine("-----------------\n");
+
 pass.PassengerType();
 
 Console.WriteLine();
@@ -41,7 +43,9 @@ s.PassengerType();
 
 t.PassengerType();
 
-Console.WriteLine($"The profile of passanger {pass.FirstName} is: {(pass.CheckProfile("Passenger1", "Passenger1") ? "verified" : "unverified")}");
+Console.WriteLine("-----------------\n");
+
+Console.WriteLine($"The profile of passanger {pass.FirstName} is: {(pass.CheckProfile("Passenger1", "Passenger1") ? "verified" : "unverified")}\n");
 
 ServiceFlight sf = new ServiceFlight();
 
@@ -58,3 +62,23 @@ sf.GetFlights("Destination", dest);
 Console.WriteLine("-----------------\n");
 
 sf.ShowFlightDetails(TestData.PlaneA);
+
+Console.WriteLine("-----------------\n");
+
+DateTime startDate = new DateTime(2020, 01, 30);
+
+Console.WriteLine($"Number of flights dating 7 days after {startDate}: {sf.ProgrammedFlightNumber(startDate)}\n");
+
+Console.WriteLine($"Average duration for the flights going to {dest} = {sf.DurationAverage(dest)}\n");
+
+Console.WriteLine("-----------------\n");
+
+sf.DestinationGroupedFlights();
+
+Console.WriteLine("-----------------\n");
+
+Console.WriteLine("Test delegues:\n");
+
+sf.FlightDetailsDel(TestData.PlaneB);
+
+Console.WriteLine($"[Del] Average duration for the flights going to {dest} = {sf.DurationAverageDel(dest)}");

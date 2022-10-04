@@ -71,45 +71,87 @@ namespace AM.ApplicationCore.Services
                 Console.WriteLine($"Flight date: {info.FlightDate}\nFlight destination: {info.Destination}");
             }
         }
-
-        Dictionary<string, List<DateTime?>> DestinationGroupedFlights()
+   
+        public int ProgrammedFlightNumber(DateTime startDate)
         {
+            int q =
+                (from flight in Flights
+                 where !flight.FlightDate.Equals(startDate)
+                 && (flight.FlightDate - startDate).TotalDays < 7
+                 select flight).Count();
+
+            return q;
+        }
+
+        public double? DurationAverage(string destination)
+        {
+            double? avg = (
+                    from flight in Flights
+                    where flight.Destination!.Equals(destination)
+                    select flight.EstimatedDuration
+                ).Average();
+
+            return avg;
+        }
+
+        public List<Flight> OrderedDurationFlights()
+        {
+            IEnumerable<Flight> q =
+                    from flight in Flights
+                    orderby flight.EstimatedDuration
+                    descending
+                    select flight;
+
+            return q.ToList();
+        }
+
+        public List<Passenger> SeniorTravellers(Flight flight)
+        {
+            IEnumerable<Passenger> q = (
+                    from passenger in flight.Passengers.OfType<Traveller>()
+                    orderby passenger.BirthDate
+                    select passenger
+                ).Take(3);
+
+            return q.ToList();
+        }
+
+        public void DestinationGroupedFlights()
+        {
+            var q = 
+                    from flight in Flights
+                    group flight by flight.Destination;
+
+            foreach (var g in q)
+            {
+                Console.WriteLine(g.Key);
+                foreach(Flight f in g)
+                {
+                    Console.WriteLine($"Decollage: {f.FlightDate}");
+                }
+                Console.WriteLine();
+            }
             
         }
 
-        int DurationAverage(string destination)
-        {
-            
-        }
+        public Action<Plane> FlightDetailsDel;
+        public Func<string, double?> DurationAverageDel;
 
-        List<DateTime>? GetFlightDates(string destination)
+        public ServiceFlight()
         {
-            
-        }
+            // FlightDetailsDel = ShowFlightDetails;
+            // DurationAverageDel = DurationAverage;
+            FlightDetailsDel = (plane) => ShowFlightDetails(plane);
+            DurationAverageDel = (dest) =>
+            {
+                double? avg = (
+                 from flight in Flights
+                 where flight.Destination!.Equals(dest)
+                 select flight.EstimatedDuration
+             ).Average();
 
-        void GetFlights(string filterType, string filterValue)
-        {
-            
-        }
-
-        List<Flight> OrderedDurationFlights()
-        {
-            
-        }
-
-        int ProgrammedFlightNumber(DateTime startDate)
-        {
-
-        }
-
-        List<Passenger> SeniorTravellers(Flight flight)
-        {
-            
-        }
-
-        void ShowFlightDetails(Plane plane)
-        {
-            
+                return avg;
+            };
         }
     }
 }

@@ -12,11 +12,12 @@ namespace AM.ApplicationCore.Interfaces
 
         int ProgrammedFlightNumber(DateTime startDate);
 
-        int DurationAverage(string destination);
+        double? DurationAverage(string destination);
 
         List<Flight> OrderedDurationFlights();
+
         List<Passenger> SeniorTravellers(Flight flight);
 
-        Dictionary<string, List<DateTime?>> DestinationGroupedFlights();
+        void DestinationGroupedFlights();
     }
 }
