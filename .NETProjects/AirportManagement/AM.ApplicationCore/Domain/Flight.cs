@@ -6,7 +6,7 @@
 
         public string? Destination { get; set; }
 
-        public DateTime? FlightDate { get; set; }
+        public DateTime FlightDate { get; set; }
 
         public string? Departure { get; set; }
 
@@ -20,7 +20,7 @@
 
         public override string ToString()
         {
-            return $"[Flight]: the destination is {Destination}";
+            return $"[Flight on {Plane!.PlaneType}]: {Departure} - {Destination} * ETA: {EstimatedDuration}";
         }
     }
 }

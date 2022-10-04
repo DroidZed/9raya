@@ -47,3 +47,14 @@ ServiceFlight sf = new ServiceFlight();
 
 sf.Flights = TestData.ListFlights;
 
+String dest = "Paris";
+
+Console.WriteLine($"Dates for {dest}:\n{string.Join("\n",sf.GetFlightDates(dest)!)}\n");
+
+Console.WriteLine($"Flights for {dest}:");
+
+sf.GetFlights("Destination", dest);
+
+Console.WriteLine("-----------------\n");
+
+sf.ShowFlightDetails(TestData.PlaneA);

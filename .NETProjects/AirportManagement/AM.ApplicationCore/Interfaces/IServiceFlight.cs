@@ -4,8 +4,19 @@ namespace AM.ApplicationCore.Interfaces
 {
     public interface IServiceFlight
     {
-        public List<DateTime?>? GetFlightDates(string destination);
+        List<DateTime>? GetFlightDates(string destination);
 
-        public void GetFlights(string filterType, string filterValue);
+        void GetFlights(string filterType, string filterValue);
+
+        void ShowFlightDetails(Plane plane);
+
+        int ProgrammedFlightNumber(DateTime startDate);
+
+        int DurationAverage(string destination);
+
+        List<Flight> OrderedDurationFlights();
+        List<Passenger> SeniorTravellers(Flight flight);
+
+        Dictionary<string, List<DateTime?>> DestinationGroupedFlights();
     }
 }

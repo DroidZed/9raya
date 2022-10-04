@@ -7,27 +7,17 @@ namespace AM.ApplicationCore.Services
     {
         public List<Flight>? Flights { get; set; } = new List<Flight>();
 
-        public List<DateTime?>? GetFlightDates(string destination)
+        public List<DateTime>? GetFlightDates(string destination)
         {
 
             if (Flights == null) return null;
 
-            List<DateTime?>? Dates = new List<DateTime?>();
-            /*
-            for (int i = 0; i < Flights?.Count; i++)
-            {
-                if (Flights[i].Destination.Equals(destination))
-                    Dates.Add(Flights[i].FlightDate);
-            }
-            */
+            IEnumerable<DateTime> flightsQuery =
+                from flight in Flights
+                where flight.Destination!.Equals(destination)
+                select flight.FlightDate;
 
-            foreach (var flight in Flights)
-            {
-                if (flight.Destination!.Equals(destination))
-                    Dates.Add(flight.FlightDate);
-            }
-
-            return Dates;
+            return flightsQuery.ToList();
         }
 
         public void GetFlights(string filterType, string filterValue)
@@ -67,6 +57,59 @@ namespace AM.ApplicationCore.Services
                 default:
                     break;
             }
+        }
+
+        public void ShowFlightDetails(Plane plane)
+        {
+            var flightsQuery = 
+                from flight in Flights
+                where flight.Plane!.Equals(plane)
+                select new { flight.FlightDate, flight.Destination };
+
+            foreach (var info in flightsQuery) 
+            {
+                Console.WriteLine($"Flight date: {info.FlightDate}\nFlight destination: {info.Destination}");
+            }
+        }
+
+        Dictionary<string, List<DateTime?>> DestinationGroupedFlights()
+        {
+            
+        }
+
+        int DurationAverage(string destination)
+        {
+            
+        }
+
+        List<DateTime>? GetFlightDates(string destination)
+        {
+            
+        }
+
+        void GetFlights(string filterType, string filterValue)
+        {
+            
+        }
+
+        List<Flight> OrderedDurationFlights()
+        {
+            
+        }
+
+        int ProgrammedFlightNumber(DateTime startDate)
+        {
+
+        }
+
+        List<Passenger> SeniorTravellers(Flight flight)
+        {
+            
+        }
+
+        void ShowFlightDetails(Plane plane)
+        {
+            
         }
     }
 }
