@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Curriculum Vitae V2</string>
+    <string name="full_name">Full name</string>
+    <string name="image">image</string>
+    <string name="Email">Email</string>
+    <string name="Skills">Skills</string>
+    <string name="Language">Language</string>
+    <string name="Hobbies">Hobbies</string>
+    <string name="Gender">Gender</string>
+    <string name="Male">Male</string>
+    <string name="Age">Age</string>
+    <string name="Female">Female</string>
+    <string name="submit">Submit</string>
+    <string name="title1">Create your resume</string>
+    <string name="title2">Your resume</string>
+    <string name="games">Games</string>
+    <string name="sport">Sport</string>
+    <string name="music">Music</string>
+    <string name="Android">Android</string>
+    <string name="iOS">iOS</string>
+    <string name="Flutter">Flutter</string>
+    <string name="english">English</string>
+    <string name="french">French</string>
+    <string name="arabic">Arabic</string>
+    <string name="borderImg">Border image</string>
+</resources>
