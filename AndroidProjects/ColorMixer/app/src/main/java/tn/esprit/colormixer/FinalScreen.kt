@@ -54,16 +54,13 @@ class FinalScreen : AppCompatActivity() {
             else -> "Your answer is wrong !"
         }
 
-        quitBtn.let { btn ->
-
-            btn.setBackgroundColor(
-                resources.getColor(
-                    when {
-                        isCorrect -> R.color.success
-                        else -> R.color.error
-                    }
-                )
+        quitBtn.setBackgroundColor(
+            resources.getColor(
+                when {
+                    isCorrect -> R.color.success
+                    else -> R.color.error
+                }
             )
-        }
+        )
     }
 }

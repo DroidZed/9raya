@@ -48,7 +48,7 @@ class SecondActivity : AppCompatActivity() {
 
                 chosenColor = findViewById(checkedRadioButtonId)
 
-                when (chosenColor?.id) {
+                when (chosenColor.id) {
                     R.id.purpleRad -> selectedAnswer = "purple"
                     R.id.orangeRad -> selectedAnswer = "orange"
                     R.id.greenRad -> selectedAnswer = "green"
