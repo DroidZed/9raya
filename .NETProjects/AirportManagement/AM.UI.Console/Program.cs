@@ -20,8 +20,8 @@ Plane p3 = new Plane {
 };
 
 Passenger pass = new Passenger { 
-    FirstName = "Passenger1",
-    LastName = "Passenger1",
+    FirstName = "passenger1",
+    LastName = "passenger1",
     BirthDate = new DateTime(1970, 1, 10),
     EmailAddress = "passenger1.passenger1@example.com",
     PassportNumber = 125465,
@@ -82,3 +82,11 @@ Console.WriteLine("Test delegues:\n");
 sf.FlightDetailsDel(TestData.PlaneB);
 
 Console.WriteLine($"[Del] Average duration for the flights going to {dest} = {sf.DurationAverageDel(dest)}");
+
+Console.WriteLine("-----------------\n");
+
+Console.WriteLine($"Before toUpper:\n{pass}");
+
+pass.UpperFullName();
+
+Console.WriteLine($"After toUpper:\n{pass}");
