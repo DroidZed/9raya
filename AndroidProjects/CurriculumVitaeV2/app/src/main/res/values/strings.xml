@@ -23,4 +23,8 @@
     <string name="french">French</string>
     <string name="arabic">Arabic</string>
     <string name="borderImg">Border image</string>
+    <string name="info_title">About</string>
+    <string name="you_can_contact_me_via_my_email">You can contact me via my email :</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

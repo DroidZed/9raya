@@ -1,12 +1,12 @@
 package tn.esprit.curriculumvitaev2
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.SeekBar
-import logic.CvObject
+import androidx.appcompat.app.AppCompatActivity
+import logic.*
 
 class FormPart2 : AppCompatActivity() {
 
@@ -30,7 +30,6 @@ class FormPart2 : AppCompatActivity() {
 
         supportActionBar?.title = resources.getString(R.string.title1)
 
-
         androidSk = findViewById(R.id.andrSkBar)
         iosSk = findViewById(R.id.iosSkBar)
         flutterSk = findViewById(R.id.fltrSkBar)
@@ -48,16 +47,24 @@ class FormPart2 : AppCompatActivity() {
         submitBtn.setOnClickListener {
 
             val scores = hashMapOf(
-                Pair("Android", androidSk.progress),
-                Pair("iOS", iosSk.progress),
-                Pair("Flutter", flutterSk.progress)
+                Pair(ANDROID_KEY, androidSk.progress),
+                Pair(iOS_KEY, iosSk.progress),
+                Pair(FLUTTER_KEY, flutterSk.progress)
             )
 
             val checkedLanguages =
-                listOf(arabicChbx, frenchChbx, englishChbx).filter { it.isChecked }.map { it.text }
+                hashMapOf(
+                    Pair(EN, englishChbx.isChecked),
+                    Pair(AR, arabicChbx.isChecked),
+                    Pair(FR, frenchChbx.isChecked)
+                )
 
             val checkedHobbies =
-                listOf(musicChbx, sportChbx, gamesChbx).filter { it.isChecked }.map { it.text }
+                hashMapOf(
+                    Pair(GAMES, gamesChbx.isChecked),
+                    Pair(SPORT, sportChbx.isChecked),
+                    Pair(MUSIC, musicChbx.isChecked)
+                )
 
             val cv = intent.getParcelableExtra<CvObject>("cv")
 

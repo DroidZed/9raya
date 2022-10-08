@@ -1,15 +1,17 @@
 package logic
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CvObject(
-    var fullName: String,
-    var email: String,
-    var age: Int,
-    var gender: String,
+    var fullName: String? = null,
+    var email: String? = null,
+    var age: Int? = null,
+    var gender: String? = null,
     var skillsScore: HashMap<String,Int>? = null,
-    var languages: List<CharSequence>? = null,
-    var hobbies: List<CharSequence>? = null,
+    var languages: HashMap<String, Boolean>? = null,
+    var hobbies: HashMap<String, Boolean>? = null,
+    var imgURI: Uri? = null,
 ) : Parcelable

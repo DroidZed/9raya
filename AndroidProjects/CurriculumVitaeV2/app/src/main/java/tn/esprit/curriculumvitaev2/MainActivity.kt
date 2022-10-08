@@ -2,13 +2,10 @@ package tn.esprit.curriculumvitaev2
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Patterns
 import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import logic.CvObject
@@ -22,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emailTextLayout: TextInputLayout
     private lateinit var ageTextLayout: TextInputLayout
     private lateinit var imageBorder: ImageView
+    private lateinit var profileImage: ImageView
 
     private lateinit var radioGroup: RadioGroup
     private lateinit var checkedRadioButton: RadioButton
@@ -29,9 +27,23 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var layoutTitle: TextView
 
+    private val cv = CvObject()
+
+    private val pickImage = 100
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == pickImage) {
+            profileImage.setImageURI(data?.data)
+            cv.imgURI = data?.data
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         fNameTextLayout = findViewById(R.id.fullNameTxtInput)
         emailTextLayout = findViewById(R.id.emailTxtInput)
@@ -41,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         nextBtn = findViewById(R.id.nxtBtn)
         imageBorder = findViewById(R.id.borderImg)
         layoutTitle = findViewById(R.id.layoutTitle)
+
+        profileImage = findViewById(R.id.profileImage)
 
         supportActionBar?.title = resources.getString(R.string.title1)
 
@@ -64,11 +78,27 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        profileImage.setOnClickListener {
+
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, pickImage)
+        }
+
 
         nextBtn.setOnClickListener {
             val checkedID: Int = radioGroup.checkedRadioButtonId
 
             when {
+
+                cv.imgURI == null -> {
+
+                    Toast.makeText(
+                        this,
+                        "Please select an image !",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
 
                 checkedID == -1 -> {
                     imageBorder.setImageResource(R.drawable.background_border_red)
@@ -110,12 +140,11 @@ class MainActivity : AppCompatActivity() {
                     imageBorder.setImageResource(R.drawable.background_border)
                     layoutTitle.setTextColor(resources.getColor(R.color.colorPrimaryDark))
 
-                    val cv = CvObject(
-                        fullName = fNameTextLayout.editText?.text.toString(),
-                        email = emailTextLayout.editText?.text.toString(),
-                        age = Integer.parseInt(ageTextLayout.editText?.text.toString()),
-                        gender = checkedRadioButton.text.toString()
-                    )
+
+                    cv.fullName = fNameTextLayout.editText?.text.toString()
+                    cv.email = emailTextLayout.editText?.text.toString()
+                    cv.age = Integer.parseInt(ageTextLayout.editText?.text.toString())
+                    cv.gender = checkedRadioButton.text.toString()
 
                     Intent(this, FormPart2::class.java).let { i ->
                         i.putExtra("cv", cv)

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/colorPrimary"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.Toolbar
+        app:menu="@menu/menu"
+        app:title="@string/title2"
+        app:titleTextColor="@color/white"
+        app:titleMarginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+</LinearLayout>
