@@ -1,17 +1,22 @@
-'use strict';
+import mongoose from 'mongoose'
 
-export default class User {
-	constructor({
-		id = 0,
-		username = '',
-		password = '',
-		wallet = 0.0,
-		games = [],
-	}) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.wallet = wallet;
-		this.games = games;
-	}
-}
+const { Schema, model } = mongoose
+
+const userSchema = new Schema(
+    {
+        username: { type: String, required: true },
+        password: { type: String, required: true },
+        wallet: { type: Number, required: true },
+        games: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Game',
+            },
+        ],
+    },
+    {
+        timestamps: true,
+    }
+)
+
+export default model('User', userSchema)

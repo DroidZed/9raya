@@ -1,21 +1,23 @@
-'use strict';
+'use strict'
 
-import express from 'express';
+import express from 'express'
 
 import {
-	listGames,
-	publishGame,
-	getGameDetails,
-	modifyGame,
-	purchaseGame,
-} from '../controllers/game.js';
+    listGames,
+    publishGame,
+    getGameDetails,
+    modifyGame,
+    purchaseGame,
+} from '../controllers/game.js'
 
-const router = express.Router();
+const router = express.Router()
 
-router.route('/').get(listGames).post(publishGame);
+router.route('/').get(listGames)
 
-router.route('/buy').post(purchaseGame);
+router.route('/publish').post(publishGame)
 
-router.route('/:gameId').get(getGameDetails).put(modifyGame);
+router.route('/buy').post(purchaseGame)
 
-export default router;
+router.route('/:gameId').get(getGameDetails).put(modifyGame)
+
+export default router

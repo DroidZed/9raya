@@ -1,13 +1,22 @@
-'use strict';
+import mongoose from 'mongoose'
 
-export default class Achat {
-	/**
-	 *
-	 * @param {number} id
-	 * @param {Date} boughtDate
-	 */
-	constructor(id, boughtDate) {
-		this.id = id;
-		this.boughtDate = boughtDate;
-	}
-}
+const { Schema, model } = mongoose
+
+const achatSchema = new Schema(
+    {
+        boughtDate: { type: Date, required: true },
+        game: {
+            type: Schema.Types.ObjectId,
+            ref: 'Game',
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    },
+    {
+        timestamps: true,
+    }
+)
+
+export default model('Achat', achatSchema)

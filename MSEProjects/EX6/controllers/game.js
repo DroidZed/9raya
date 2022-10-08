@@ -1,51 +1,88 @@
-'use strict';
+'use strict'
 
-import { buyGame } from '../service/achat.js';
-import { findAll, findGameById, save, updateGame } from '../service/game.js';
+import Game from '../models/game.js'
+import Achat from '../models/achat.js'
+import User from '../models/user.js'
 
 // ! /
-export function listGames(_, res) {
-	const result = findAll();
+export async function listGames(_, res) {
+    const games = await Game.find()
 
-	res.status(result.status).json(result.object);
-}
-// ! /
-export function publishGame(req, res) {
-	const result = save(req.body);
-	res
-		.status(result.status)
-		.json({ message: result.message, entity: result.object });
+    if (games) res.status(200).json(games)
+    else res.status(404).json({ message: 'No games found' })
 }
 
-// ! /buy?gameId=1&userId=1
-export function purchaseGame(req, res) {
-	// print the query parameters to the console
-	console.log(req.query);
-	const result = buyGame(
-		Number.parseInt(req.query.gameId),
-		Number.parseInt(req.query.userId)
-	);
+// ! /publish
+export async function publishGame(req, res) {
+    const game = new Game({
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        quantity: req.body.quantity,
+    })
 
-	res
-		.status(result.status)
-		.json({ message: result.message, entity: result.object });
+    try {
+        const newGame = await game.save()
+        res.status(201).json(newGame)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+}
+
+// ! /buy
+export async function purchaseGame(req, res) {
+    const { gameId, userId } = req.body
+
+    const game = await Game.findById(gameId)
+
+    if (game) {
+        const user = await User.findById(userId)
+
+        if (user)
+            if (user.wallet >= game.price) {
+                const newWallet = user.wallet - game.price
+                const newUser = await User.updateOne(
+                    { _id: userId },
+                    {
+                        wallet: newWallet,
+                        $push: { games: gameId },
+                    },
+                    { new: true }
+                )
+                // add the user to the games document and decrement the quantity of the game but don't make it reach 0
+                const newGame = await Game.updateOne(
+                    { _id: gameId },
+                    {
+                        $push: { players: userId },
+                        quantity: game.quantity >= 1 ? game.quantity - 1 : 0,
+                    },
+                    { new: true }
+                )
+                const achat = await Achat.create({
+                    game: gameId,
+                    user: userId,
+                    boughtDate: new Date(),
+                })
+                res.status(201).json({ achat, newUser, newGame })
+            } else res.status(400).json({ message: 'Not enough money' })
+        else res.status(404).json({ message: 'User not found' })
+    } else res.status(404).json({ message: 'Game not found' })
 }
 
 // ! /:gameId
-export function getGameDetails(req, res) {
-	const result = findGameById(Number.parseInt(req.params.gameId));
+export async function getGameDetails(req, res) {
+    const game = await Game.findById(req.params.gameId)
 
-	res.status(result.status).json(result.object);
+    if (game) res.status(200).json(game)
+    else res.status(404).json({ message: 'Game not found' })
 }
 
 // ! /:gameId
-export function modifyGame(req, res) {
-	const result = updateGame(
-		Number.parseInt(req.params.gameId),
-		req.params.body
-	);
+export async function modifyGame(req, res) {
+    const game = await Game.findByIdAndUpdate(req.params.gameId, req.body, {
+        new: true,
+    })
 
-	res
-		.status(result.status)
-		.json({ message: result.message, entity: result.object });
+    if (game) res.status(200).json(game)
+    else res.status(404).json({ message: 'Game not found' })
 }
