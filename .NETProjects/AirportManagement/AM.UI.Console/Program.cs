@@ -1,18 +1,6 @@
 ﻿using AM.ApplicationCore.Domain;
 using AM.ApplicationCore.Services;
 
-/* 
-Plane p1 = new();
-
-p1.Capacity = 720;
-p1.ManufactureDate = DateTime.Now;
-p1.PlaneType = PlaneType.Boing;
-p1.PlaneId = 2;
-
-Plane p2 = new Plane(PlaneType.Airbus, 200, new DateTime(2022, 5, 17));
-
-*/
-
 Plane p3 = new Plane { 
     PlaneType = PlaneType.Airbus,
     Capacity = 200, 

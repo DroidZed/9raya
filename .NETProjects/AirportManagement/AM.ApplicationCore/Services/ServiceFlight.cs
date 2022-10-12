@@ -103,16 +103,16 @@ namespace AM.ApplicationCore.Services
         public List<Passenger> SeniorTravellers(Flight flight)
         {
             IEnumerable<Passenger> q = 
-                    flight.Passengers.OfType<Traveller>().OrderBy(p => p.BirthDate).Take(3);
+                    flight.Passengers!.OfType<Traveller>().OrderBy(p => p.BirthDate).Take(3);
 
             return q.ToList();
         }
 
         public void DestinationGroupedFlights()
         {
-            var q =  Flights. GroupBy(f => f.Destination);
+            var query =  Flights.GroupBy(f => f.Destination);
 
-            foreach (var g in q)
+            foreach (var g in query)
             {
                 Console.WriteLine(g.Key);
                 foreach(Flight f in g)
@@ -121,7 +121,6 @@ namespace AM.ApplicationCore.Services
                 }
                 Console.WriteLine();
             }
-            
         }
 
         public Action<Plane> FlightDetailsDel;
