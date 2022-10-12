@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
+import androidx.appcompat.widget.Toolbar
 import logic.*
 import tn.esprit.curriculumvitaev2.fragments.BasicInfoFragment
 import tn.esprit.curriculumvitaev2.fragments.HobbiesFragment
@@ -26,6 +27,8 @@ class ResumePage : AppCompatActivity() {
     private lateinit var hobbiesBtn: Button
     private lateinit var langBtn: Button
 
+    private lateinit var toolbar: Toolbar
+
     private lateinit var fragContainer: FragmentContainerView
 
     private lateinit var basicInfoFragment: BasicInfoFragment
@@ -34,7 +37,7 @@ class ResumePage : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
@@ -50,7 +53,10 @@ class ResumePage : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_resume_page)
+
+        toolbar = findViewById(R.id.toolBar)
 
         cv = intent.getParcelableExtra("cv")!!
 
@@ -62,6 +68,8 @@ class ResumePage : AppCompatActivity() {
         skillsBtn = findViewById(R.id.skillsBtn)
         hobbiesBtn = findViewById(R.id.hobbiesBtn)
         langBtn = findViewById(R.id.langBtn)
+
+        setSupportActionBar(toolbar)
 
         name.text = cv.fullName
         email.text = cv.email
@@ -109,6 +117,6 @@ class ResumePage : AppCompatActivity() {
     private fun navigateToFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(
             R.id.fragContainer, fragment
-        ).commit()
+        ).addToBackStack("nav").commit()
     }
 }

@@ -3,19 +3,20 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:background="@color/colorPrimary"
+    android:background="@color/purple_500"
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
         app:menu="@menu/menu"
-        app:title="@string/title2"
+        app:title="@string/app_name"
         app:titleTextColor="@color/white"
         app:titleMarginStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </androidx.appcompat.widget.Toolbar>
+
 
 
 </LinearLayout>

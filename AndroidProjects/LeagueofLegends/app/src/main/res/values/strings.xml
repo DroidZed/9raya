@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">League of Legends</string>
+
+    <!-- spells desc -->
+    <string name="description_lol">Whether playing solo or co-op with friends, League of Legends is an intense and highly competitive strategy / action game designed for those who like to fight for victory.</string>
+    <string name="smite_description">It deals true damage to the target.</string>
+    <string name="heal_description">Restores health to your champion.</string>
+    <string name="ghost_description">Increases your champion\'s movement speed.</string>
+    <string name="flash_description">Blink to a short distance.</string>
+
+    <!-- champions -->
+    <string name="lee_sin">Name: Lee Sin</string>
+    <string name="thresh">Name: Thresh</string>
+    <string name="msf">Name: Miss Fortune</string>
+    <string name="nasus">Name: Nasus</string>
+
+    <!-- roles -->
+    <string name="jungler">Role: Jungler</string>
+    <string name="adc">Role: ADC</string>
+    <string name="top">Role: Top</string>
+    <string name="support">Role: Support</string>
+    <string name="about">About</string>
+    <string name="spells">Spells</string>
+    <string name="champs">Champions</string>
+
+    <!-- spells -->
+    <string name="flash">Name: Flash</string>
+    <string name="ghost">Name: Ghost</string>
+    <string name="heal">Name: Heal</string>
+    <string name="smite">Name: Smite</string>
+
+    <!-- others -->
+    <string name="content_desc_champ_icon">content Desc Champ Icon</string>
+    <string name="content_desc_role_icon">content Desc Spell Icon</string>
+</resources>

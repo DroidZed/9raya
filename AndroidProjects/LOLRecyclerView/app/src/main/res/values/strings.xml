@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LOL RecyclerView</string>
+    <string name="champ_image">champ image</string>
+</resources>
