@@ -1,4 +1,4 @@
-package logic
+package tn.esprit.curriculumvitaev2.utils
 
 import android.content.Context
 import android.view.inputmethod.InputMethodManager

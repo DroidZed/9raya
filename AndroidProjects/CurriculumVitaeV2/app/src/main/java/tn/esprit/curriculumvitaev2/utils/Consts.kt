@@ -1,4 +1,6 @@
-package logic
+package tn.esprit.curriculumvitaev2.utils
+
+import tn.esprit.curriculumvitaev2.R
 
 const val ANDROID_KEY = "Android"
 const val FLUTTER_KEY = "Flutter"

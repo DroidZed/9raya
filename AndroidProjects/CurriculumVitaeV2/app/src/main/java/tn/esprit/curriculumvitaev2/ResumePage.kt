@@ -1,6 +1,7 @@
 package tn.esprit.curriculumvitaev2
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,14 +9,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
 import androidx.appcompat.widget.Toolbar
-import logic.*
+import androidx.fragment.app.FragmentContainerView
 import tn.esprit.curriculumvitaev2.fragments.BasicInfoFragment
 import tn.esprit.curriculumvitaev2.fragments.HobbiesFragment
 import tn.esprit.curriculumvitaev2.fragments.LanguageFragment
 import tn.esprit.curriculumvitaev2.fragments.SkillsFragment
+import tn.esprit.curriculumvitaev2.utils.*
 
 class ResumePage : AppCompatActivity() {
 
@@ -26,6 +26,8 @@ class ResumePage : AppCompatActivity() {
     private lateinit var skillsBtn: Button
     private lateinit var hobbiesBtn: Button
     private lateinit var langBtn: Button
+    private lateinit var careerBtn: Button
+
 
     private lateinit var toolbar: Toolbar
 
@@ -43,7 +45,7 @@ class ResumePage : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
         R.id.action_info -> {
-            navigateToFragment(basicInfoFragment)
+            navigateToFragment(R.id.fragContainer, supportFragmentManager, basicInfoFragment, "nav")
             true
         }
 
@@ -68,6 +70,7 @@ class ResumePage : AppCompatActivity() {
         skillsBtn = findViewById(R.id.skillsBtn)
         hobbiesBtn = findViewById(R.id.hobbiesBtn)
         langBtn = findViewById(R.id.langBtn)
+        careerBtn = findViewById(R.id.careerBtn)
 
         setSupportActionBar(toolbar)
 
@@ -102,21 +105,23 @@ class ResumePage : AppCompatActivity() {
         ).commit()
 
         skillsBtn.setOnClickListener {
-            navigateToFragment(skillsFragment)
+            navigateToFragment(R.id.fragContainer, supportFragmentManager, skillsFragment, "nav")
         }
 
         hobbiesBtn.setOnClickListener {
-            navigateToFragment(hobbiesFragment)
+            navigateToFragment(R.id.fragContainer, supportFragmentManager, hobbiesFragment, "nav")
         }
 
         langBtn.setOnClickListener {
-            navigateToFragment(languageFragment)
+            navigateToFragment(R.id.fragContainer, supportFragmentManager, languageFragment, "nav")
         }
-    }
 
-    private fun navigateToFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(
-            R.id.fragContainer, fragment
-        ).addToBackStack("nav").commit()
+        careerBtn.setOnClickListener {
+            Intent(this, CareerActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
+
     }
 }

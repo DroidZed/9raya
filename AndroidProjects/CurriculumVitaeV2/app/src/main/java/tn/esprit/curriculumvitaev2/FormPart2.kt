@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
-import logic.*
+import tn.esprit.curriculumvitaev2.utils.*
 
 class FormPart2 : AppCompatActivity() {
 

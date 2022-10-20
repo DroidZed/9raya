@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">?attr/colorPrimaryVariant</item>
     </style>
-    <style name="Theme.ResumePage" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>

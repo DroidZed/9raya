@@ -1,4 +1,4 @@
-package logic
+package tn.esprit.curriculumvitaev2.utils
 
 import android.net.Uri
 import android.os.Parcelable

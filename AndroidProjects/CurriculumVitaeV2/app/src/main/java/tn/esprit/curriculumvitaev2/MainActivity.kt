@@ -8,9 +8,9 @@ import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
-import logic.CvObject
-import logic.hideKeyboard
-import logic.on
+import tn.esprit.curriculumvitaev2.utils.CvObject
+import tn.esprit.curriculumvitaev2.utils.hideKeyboard
+import tn.esprit.curriculumvitaev2.utils.on
 
 
 class MainActivity : AppCompatActivity() {

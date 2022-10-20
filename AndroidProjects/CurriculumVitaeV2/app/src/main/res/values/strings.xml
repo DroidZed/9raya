@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Curriculum Vitae V2</string>
+    <string name="title_text">Your Resume</string>
     <string name="full_name">Full name</string>
+    <string name="my_career">My Career</string>
+    <string name="your_career">Your Career</string>
     <string name="image">image</string>
     <string name="Email">Email</string>
     <string name="Skills">Skills</string>
@@ -25,6 +28,7 @@
     <string name="borderImg">Border image</string>
     <string name="info_title">About</string>
     <string name="you_can_contact_me_via_my_email">You can contact me via my email :</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="experience">Experience</string>
+    <string name="education">Education</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
 </resources>
