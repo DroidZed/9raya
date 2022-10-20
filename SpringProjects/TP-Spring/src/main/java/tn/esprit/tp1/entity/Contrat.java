@@ -1,10 +1,7 @@
 package tn.esprit.tp1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,8 +10,10 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
+@EqualsAndHashCode
+@AllArgsConstructor
 @Table(name = "contrat")
 public class Contrat implements Serializable {
 
@@ -23,7 +22,7 @@ public class Contrat implements Serializable {
     @Id
     @Column(name = "id_contrat")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idContrat;
+    private Long idContrat;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_debut_contrat")

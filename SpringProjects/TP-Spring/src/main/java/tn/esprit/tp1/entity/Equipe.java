@@ -1,9 +1,6 @@
 package tn.esprit.tp1.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,8 +9,10 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
+@EqualsAndHashCode
+@AllArgsConstructor
 @Table(name = "equipe")
 public class Equipe implements Serializable {
 
@@ -21,7 +20,7 @@ public class Equipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idEquipe;
+    private Long idEquipe;
 
     private String nomEquipe;
 

@@ -1,9 +1,6 @@
 package tn.esprit.tp1.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,15 +8,17 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
+@EqualsAndHashCode
+@AllArgsConstructor
 @Table(name = "detail_equipe")
 public class DetailEquipe implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    private Integer salle;
+    private Long salle;
 
     private String thematique;
 

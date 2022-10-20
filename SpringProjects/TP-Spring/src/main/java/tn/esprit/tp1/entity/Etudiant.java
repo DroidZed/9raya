@@ -1,10 +1,7 @@
 package tn.esprit.tp1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,8 +11,10 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
+@EqualsAndHashCode
+@AllArgsConstructor
 @Table(name = "etudiant")
 public class Etudiant implements Serializable {
 
@@ -23,7 +22,7 @@ public class Etudiant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idEtudiant;
+    private Long idEtudiant;
 
     private String nom, prenom;
 
