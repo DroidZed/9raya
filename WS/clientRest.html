@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript">
+
+
+            //1. Initialisation de l'object la requete XML HTTP
+            var xmlhttp;
+            function init() {
+                xmlhttp = new XMLHttpRequest()//envoi des http request ;
+            }
+
+
+            //2. Preparer la requete, envoyer la requete
+
+            //2.1 Obtenir les details inseres dans le formulaire et les affecter a des variables
+            function getdetails() {
+                var rendezvous = document.getElementById( "IDRendezvous" );
+                var url = "http://localhost:8080/LogementService/api/rendezvous/" + rendezvous.value;
+                xmlhttp.open( 'GET', url, true );
+                //2.2 Envoyer la requete HTTP
+                xmlhttp.send( null );
+
+                //2.3 Preparer les champs de reponses partie client du formulaire
+                xmlhttp.onreadystatechange = function () {
+                    if ( xmlhttp.readyState == 4 ) {
+                        if ( xmlhttp.status == 200 ) {
+                            // console.log(xmlhttp.response);
+                            //console.log(xmlhttp.responseText);
+                            var resultat = JSON.parse( xmlhttp.responseText );
+                            //console.log(resultat.id);
+                            heure.value = "";
+                            date.value = "";
+                            tel.value = "";
+
+                            heure.value = resultat.heure;
+                            //console.log(resultat[i].id);
+                            date.value = resultat.date;
+                            tel.value = resultat.numTel;
+                            //3.Recuperer la reponse: Obtenir les details obtenu du tableau Resultat et les affecter aux champs du formulaire
+                            //Important: les valeurs recuperes correspondent au noms recuperees du serveur et non pas du client (voir exemple numtel ci-bas)
+
+                            /*for(var i in resultat){
+                            //document.getElementById("date").innerHTML=resultat[i].date;
+                        	
+                                heure.value = resultat[i].heure;
+                                    console.log(resultat[i].id);
+                                date.value = resultat[i].date;
+                                tel.value = resultat[i].numTel;
+                            } */
+                        }
+                        else
+                            alert( "Error ->" + xmlhttp.responseText );
+                    }
+                };
+            }
+
+
+
+	// 0.Formulaire de saisie
+
+
+        </script>
+    </head>
+
+    <body onload="init()">
+        <h1>Tester Service Rendez-vous (client REST)</h1>
+        <table>
+            <tr>
+                <td>Saisir ID du rendez-vous : </td>
+                <td><input type="text" id="IDRendezvous" size="10" />
+                    <input type="button" value="OK" onclick="getdetails()" />
+                </td>
+            </tr>
+            <tr>
+                <td> Date : </td>
+                <td><input type="text" readonly="true" id="date" /></td>
+            </tr>
+            <tr>
+                <td> Heure : </td>
+                <td><textarea id="heure"></textarea></td>
+            </tr>
+            <tr>
+                <td> Num tel : </td>
+                <td><input type="text" readonly="true" id="tel" /></td>
+            </tr>
+        </table>
+    </body>
+
+</html>
