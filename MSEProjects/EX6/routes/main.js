@@ -1,12 +1,34 @@
-import express from 'express';
-import { login, register } from '../controllers/user.js';
+import express from 'express'
+import { body } from 'express-validator'
+import mongoose from 'mongoose'
 
-const router = express.Router();
+import { login, register } from '../controllers/user.js'
+import { userImageConfig } from '../middlewares/multer-config.js'
 
-router.route('/login').post(login);
+const router = express.Router()
+
+router.route('/login').post(login)
 router
-	.route('/')
-	.get((req, res) => res.status(200).json({ message: 'Hello World!' }));
-router.route('/register').post(register);
+    .route('/')
+    .get((req, res) => res.status(200).json({ message: 'Hello World!' }))
+router
+    .route('/register')
+    .post(
+        body('username').isLength({ min: 3, max: 100 }),
+        body('password').isLength({ min: 8 }),
+        body('wallet').isNumeric(),
+        userImageConfig,
+        register
+    )
 
-export default router;
+router.route('/dropDB').get((req, res) => {
+    mongoose.connection.db.dropDatabase((err, result) => {
+        if (err) {
+            res.status(500).json({ message: err.message })
+        } else {
+            res.status(200).json({ message: 'Database dropped' })
+        }
+    })
+})
+
+export default router

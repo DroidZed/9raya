@@ -3,6 +3,7 @@
 import Game from '../models/game.js'
 import Achat from '../models/achat.js'
 import User from '../models/user.js'
+import { validationResult } from 'express-validator'
 
 // ! /
 export async function listGames(_, res) {
@@ -14,11 +15,18 @@ export async function listGames(_, res) {
 
 // ! /publish
 export async function publishGame(req, res) {
+    if (validationResult(req.body).isEmpty()) {
+        return res.status(400).json({ message: 'Invalid game data' })
+    }
+
     const game = new Game({
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
         quantity: req.body.quantity,
+        image: `${req.protocol}://${req.get('host')}/images/${
+            req.file.filename
+        }`,
     })
 
     try {
@@ -45,7 +53,6 @@ export async function purchaseGame(req, res) {
                     { _id: userId },
                     {
                         wallet: newWallet,
-                        $push: { games: gameId },
                     },
                     { new: true }
                 )
@@ -53,7 +60,6 @@ export async function purchaseGame(req, res) {
                 const newGame = await Game.updateOne(
                     { _id: gameId },
                     {
-                        $push: { players: userId },
                         quantity: game.quantity >= 1 ? game.quantity - 1 : 0,
                     },
                     { new: true }
@@ -79,6 +85,10 @@ export async function getGameDetails(req, res) {
 
 // ! /:gameId
 export async function modifyGame(req, res) {
+    if (validationResult(req.body).isEmpty()) {
+        return res.status(400).json({ message: 'Invalid game details' })
+    }
+
     const game = await Game.findByIdAndUpdate(req.params.gameId, req.body, {
         new: true,
     })

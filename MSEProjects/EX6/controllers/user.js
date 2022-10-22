@@ -1,4 +1,5 @@
 'use strict'
+import { validationResult } from 'express-validator'
 import User from '../models/user.js'
 
 // ! /login
@@ -13,6 +14,10 @@ export async function login(req, res) {
 
 // ! /register
 export async function register(req, res) {
+    if (validationResult(req.body).isEmpty()) {
+        return res.status(400).json({ message: 'Invalid user data' })
+    }
+
     const { username, password, wallet } = req.body
 
     const user = await User.findOne({ username: username, password: password })
@@ -30,6 +35,10 @@ export async function register(req, res) {
 
 // ! /:userId
 export async function modifyProfile(req, res) {
+    if (validationResult(req.body).isEmpty()) {
+        return res.status(400).json({ message: 'Invalid user details' })
+    }
+
     const { userId } = req.params
 
     const user = await User.findById(userId)
