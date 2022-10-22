@@ -1,4 +1,6 @@
-﻿namespace AM.ApplicationCore.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AM.ApplicationCore.Domain
 {
     public class Flight
     {
@@ -14,15 +16,17 @@
 
         public int? EstimatedDuration { get; set; }
 
-        public Plane? Plane { get; set; }
+        public int? PlaneFK { get; set; }
+
+        public Plane? MyPlane { get; set; }
 
         public string Airline { get; set; }
 
-        public ICollection<Passenger>? Passengers { get; set; }
+        public ICollection<Passenger> Passengers { get; set; }
 
         public override string ToString()
         {
-            return $"[Flight on {Plane!.PlaneType}]: {Departure} - {Destination} * ETA: {EstimatedDuration}";
+            return $"[Flight on {MyPlane!.PlaneType}]: {Departure} - {Destination} * ETA: {EstimatedDuration}";
         }
     }
 }

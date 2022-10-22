@@ -6,9 +6,9 @@ namespace AM.ApplicationCore.Services
     {
         public static void UpperFullName(this Passenger p)
         {
-            p.FirstName = string.Concat(p.FirstName![0].ToString().ToUpper(), p.FirstName.AsSpan(1));
+            p.FullName.FirstName = string.Concat(p.FullName.FirstName![0].ToString().ToUpper(), p.FullName.FirstName.AsSpan(1));
             
-            p.LastName = string.Concat(p.LastName![0].ToString().ToUpper(), p.LastName.AsSpan(1));
+            p.FullName.LastName = string.Concat(p.FullName.LastName![0].ToString().ToUpper(), p.FullName.LastName.AsSpan(1));
         }
     }
 }

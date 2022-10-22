@@ -9,15 +9,6 @@ namespace AM.ApplicationCore.Services
 
         public List<DateTime>? GetFlightDates(string destination)
         {
-            /*
-            IEnumerable<DateTime> flightsQuery =
-                from flight in Flights
-                where flight.Destination!.Equals(destination)
-                select flight.FlightDate;
-
-            return flightsQuery.ToList();
-            */
-
             return Flights
                 .Where(f => f.Destination == destination)
                 .Select(f => f.FlightDate)
@@ -30,30 +21,30 @@ namespace AM.ApplicationCore.Services
             {
                 case "Destination":
                     {
-                        Console.WriteLine(Flights.Where(f => f.Destination!.Equals(filterValue)).ToList());
+                        Flights.Where((f) => f.Destination!.Equals(filterValue)).ToList().ForEach(Console.WriteLine);
                     }
                         break;
                 case "FlightDate":
                     {
-                        Console.WriteLine(Flights.Where(f => f.FlightDate.Equals(DateTime.Parse(filterValue))).ToList());
+                        Flights.Where(f => f.FlightDate.Equals(DateTime.Parse(filterValue))).ToList().ForEach(Console.WriteLine);
                     }
                     break;
 
                 case "Departure":
                     {
-                        Console.WriteLine(Flights.Where(f => f.Departure!.Equals(filterValue)).ToList());
+                        Flights.Where(f => f.Departure!.Equals(filterValue)).ToList().ForEach(Console.WriteLine);
                     }
                     break;
 
                 case "EffectiveArrival":
                     {
-                        Console.WriteLine(Flights.Where(f => f.EffectiveArrival.Equals(DateTime.Parse(filterValue))).ToList());
+                        Flights.Where(f => f.EffectiveArrival.Equals(DateTime.Parse(filterValue))).ToList().ForEach(Console.WriteLine);
                     }
                     break;
 
                 case "EstimatedDuration":
                     {
-                        Console.WriteLine(Flights.Where(f => f.EstimatedDuration.Equals(Int32.Parse(filterValue))).ToList());
+                        Flights.Where(f => f.EstimatedDuration.Equals(Int32.Parse(filterValue))).ToList().ForEach(Console.WriteLine);
                     }
                     break;
 
@@ -67,7 +58,7 @@ namespace AM.ApplicationCore.Services
         public void ShowFlightDetails(Plane plane)
         {
             var queryLambda = Flights
-                .Where(f => f.Plane!.Equals(plane))
+                .Where(f => f.MyPlane!.Equals(plane))
                 .Select(f => new { f.FlightDate, f.Destination });
 
             foreach (var info in queryLambda)

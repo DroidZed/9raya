@@ -7,13 +7,12 @@ Plane p3 = new Plane {
     ManufactureDate = DateTime.Now
 };
 
-Passenger pass = new Passenger { 
-    FirstName = "passenger1",
-    LastName = "passenger1",
+Passenger pass = new Passenger {
+    FullName = new FullName("passenger1","passenger1"),
     BirthDate = new DateTime(1970, 1, 10),
     EmailAddress = "passenger1.passenger1@example.com",
-    PassportNumber = 125465,
-    TelNumber = 12345678
+    PassportNumber = "125465",
+    TelNumber = "12345678"
 };
 
 Staff s = new Staff();
@@ -33,7 +32,7 @@ t.PassengerType();
 
 Console.WriteLine("-----------------\n");
 
-Console.WriteLine($"The profile of passanger {pass.FirstName} is: {(pass.CheckProfile("Passenger1", "Passenger1") ? "verified" : "unverified")}\n");
+Console.WriteLine($"The profile of passanger {pass.FullName} is: {(pass.CheckProfile("Passenger1", "Passenger1") ? "verified" : "unverified")}\n");
 
 ServiceFlight sf = new ServiceFlight();
 

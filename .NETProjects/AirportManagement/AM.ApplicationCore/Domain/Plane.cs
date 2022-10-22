@@ -1,12 +1,17 @@
-﻿namespace AM.ApplicationCore.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AM.ApplicationCore.Domain
 {
     public class Plane
     {
-        public int? Capacity { get; set; }
+        public Plane() { }
+
+        public int PlaneId { get; set; }
+     
+        [Range(0, int.MaxValue)]
+        public int Capacity { get; set; }
         
         public DateTime? ManufactureDate { get; set; }
-
-        public int? PlaneId { get; set; }
 
         public PlaneType PlaneType { get; set; }
 
