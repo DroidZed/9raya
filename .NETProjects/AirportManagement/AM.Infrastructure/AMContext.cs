@@ -26,7 +26,12 @@ Initial Catalog=AymenDhahriDB;Integrated Security=true");
             modelBuilder
                 .ApplyConfiguration(new PlaneConfiguration())
                 .ApplyConfiguration(new FlightConfiguration())
-                .ApplyConfiguration(new PassengerConfiguration());
+                .ApplyConfiguration(new PassengerConfiguration())
+                .ApplyConfiguration(new TicketConfiguration());
+
+            modelBuilder.Entity<Staff>().ToTable("Staff");
+            modelBuilder.Entity<Traveller>().ToTable("Traveller");
+            modelBuilder.Entity<Passenger>().ToTable("Passenger");
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

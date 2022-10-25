@@ -24,6 +24,8 @@ namespace AM.ApplicationCore.Domain
 
         public ICollection<Passenger> Passengers { get; set; }
 
+        public ICollection<Ticket> Tickets { get; set; }
+
         public override string ToString()
         {
             return $"[Flight on {MyPlane!.PlaneType}]: {Departure} - {Destination} * ETA: {EstimatedDuration}";

@@ -30,6 +30,8 @@ namespace AM.ApplicationCore.Domain
 
         public ICollection<Flight> Flights { get; set; }
 
+        public ICollection<Ticket> Tickets { get; set; }
+
         public bool CheckProfile(string fName, string lName)
         {
             return this.FullName.FirstName == fName && this.FullName.LastName == lName;

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AM.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class migClean : Migration
+    public partial class migApp13 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,8 +32,8 @@ namespace AM.Infrastructure.Migrations
                 {
                     PassportNumber = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "date", nullable: true),
-                    FullNameFirstName = table.Column<string>(name: "FullName_FirstName", type: "nvarchar(max)", nullable: false),
-                    FullNameLastName = table.Column<string>(name: "FullName_LastName", type: "nvarchar(max)", nullable: false),
+                    PassFirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    PassLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TelNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),

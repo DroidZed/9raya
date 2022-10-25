@@ -8,7 +8,7 @@ Plane p3 = new Plane {
 };
 
 Passenger pass = new Passenger {
-    FullName = new FullName("passenger1","passenger1"),
+    FullName = new FullName { FirstName = "passenger1", LastName = "passenger1" },
     BirthDate = new DateTime(1970, 1, 10),
     EmailAddress = "passenger1.passenger1@example.com",
     PassportNumber = "125465",
