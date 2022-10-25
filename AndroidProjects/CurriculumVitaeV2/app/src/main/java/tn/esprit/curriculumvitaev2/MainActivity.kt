@@ -1,6 +1,10 @@
 package tn.esprit.curriculumvitaev2
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Patterns
@@ -8,9 +12,7 @@ import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
-import tn.esprit.curriculumvitaev2.utils.CvObject
-import tn.esprit.curriculumvitaev2.utils.hideKeyboard
-import tn.esprit.curriculumvitaev2.utils.on
+import tn.esprit.curriculumvitaev2.utils.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,23 +29,46 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var layoutTitle: TextView
 
-    private val cv = CvObject()
+    private val cvObject = CvObject()
 
-    private val pickImage = 100
+    private lateinit var sharedPrefs: SharedPreferences
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == pickImage) {
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_CODE) {
             profileImage.setImageURI(data?.data)
-            cv.imgURI = data?.data
+            cvObject.imgURI = data?.data
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            PERMS_REQUEST_CODE -> {
+
+                if (grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ) {
+                    println("GRANTED")
+                    sharedPrefs.edit().putBoolean(IS_GRANTED_READ_IMAGES, true).apply()
+                }
+            }
+
+            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        sharedPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+        requestPermissions(
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            PERMS_REQUEST_CODE
+        );
 
         fNameTextLayout = findViewById(R.id.fullNameTxtInput)
         emailTextLayout = findViewById(R.id.emailTxtInput)
@@ -56,12 +81,15 @@ class MainActivity : AppCompatActivity() {
 
         profileImage = findViewById(R.id.profileImage)
 
+
+        if (sharedPrefs.getBoolean(IS_REMEMBERED, false)) {
+            startActivity(Intent(this, ResumePage::class.java))
+        }
+
         supportActionBar?.title = resources.getString(R.string.title1)
 
         val inputLayouts = mutableListOf(
-            fNameTextLayout,
-            emailTextLayout,
-            ageTextLayout
+            fNameTextLayout, emailTextLayout, ageTextLayout
         )
 
         val inputs = inputLayouts.map { t -> t.editText }
@@ -80,8 +108,11 @@ class MainActivity : AppCompatActivity() {
 
         profileImage.setOnClickListener {
 
-            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, pickImage)
+            startActivityForResult(
+                Intent(
+                    Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI
+                ), PICK_IMAGE_CODE
+            )
         }
 
 
@@ -90,14 +121,11 @@ class MainActivity : AppCompatActivity() {
 
             when {
 
-                cv.imgURI == null -> {
+                cvObject.imgURI == null -> {
 
                     Toast.makeText(
-                        this,
-                        "Please select an image !",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                        this, "Please select an image !", Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 checkedID == -1 -> {
@@ -129,28 +157,27 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else -> {
-                    inputLayouts.filter { it.isErrorEnabled }
-                        .forEach {
-                            it.apply {
-                                isErrorEnabled = false;
-                                error = ""
-                            }
+                    inputLayouts.filter { it.isErrorEnabled }.forEach {
+                        it.apply {
+                            isErrorEnabled = false;
+                            error = ""
                         }
+                    }
                     checkedRadioButton = findViewById(checkedID)
                     imageBorder.setImageResource(R.drawable.background_border)
                     layoutTitle.setTextColor(resources.getColor(R.color.colorPrimaryDark))
 
 
-                    cv.fullName = fNameTextLayout.editText?.text.toString()
-                    cv.email = emailTextLayout.editText?.text.toString()
-                    cv.age = Integer.parseInt(ageTextLayout.editText?.text.toString())
-                    cv.gender = checkedRadioButton.text.toString()
+                    cvObject.fullName = fNameTextLayout.editText?.text.toString()
+                    cvObject.email = emailTextLayout.editText?.text.toString()
+                    cvObject.age = Integer.parseInt(ageTextLayout.editText?.text.toString())
+                    cvObject.gender = checkedRadioButton.text.toString()
 
                     Intent(this, FormPart2::class.java).let { i ->
-                        i.putExtra("cv", cv)
+                        i.putExtra(INTENT_VALUE_NAME, cvObject)
+                        println("CvObject: [MAIN ACT] $cvObject")
                         startActivity(i)
                     }
-
                 }
             }
         }

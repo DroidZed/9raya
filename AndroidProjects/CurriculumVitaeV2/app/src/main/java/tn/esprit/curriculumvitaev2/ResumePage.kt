@@ -1,7 +1,9 @@
 package tn.esprit.curriculumvitaev2
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -35,24 +37,47 @@ class ResumePage : AppCompatActivity() {
 
     private lateinit var basicInfoFragment: BasicInfoFragment
 
-    private lateinit var cv: CvObject
+    private var cvObject: CvObject? = null
+
+    private lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
-        R.id.action_info -> {
+        R.id.info -> {
             navigateToFragment(R.id.fragContainer, supportFragmentManager, basicInfoFragment, "nav")
+            true
+        }
+
+        R.id.logout -> {
+
+            alert(this, title = R.string.logout, body = R.string.logout_prompt, positiveAction = {
+                sharedPrefs.edit().clear().apply()
+                finish()
+            })
+
+            true
+        }
+
+        R.id.add_exp_action -> {
+            startActivity(Intent(this, AddExperienceActivity::class.java))
+            true
+        }
+
+        R.id.add_edu_action -> {
+            startActivity(Intent(this, AddEducationActivity::class.java))
             true
         }
 
         else -> super.onOptionsItemSelected(item)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,7 +85,22 @@ class ResumePage : AppCompatActivity() {
 
         toolbar = findViewById(R.id.toolBar)
 
-        cv = intent.getParcelableExtra("cv")!!
+        sharedPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+        cvObject = when {
+            sharedPrefs.getBoolean(IS_REMEMBERED, false) -> {
+                GSON_VAR.fromJson(
+                    sharedPrefs.getString(
+                        CV_DETAILS, GSON_VAR.toJson(CvObject())
+                    ), CvObject::class.java
+                )
+
+            }
+            else -> intent.getParcelableExtra(INTENT_VALUE_NAME)
+        }
+
+        println("CV: $cvObject")
+
 
         name = findViewById(R.id.nameText)
         email = findViewById(R.id.emailText)
@@ -74,30 +114,37 @@ class ResumePage : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        name.text = cv.fullName
-        email.text = cv.email
-        profileImage.setImageURI(cv.imgURI)
+        name.text = cvObject!!.fullName
+        email.text = cvObject!!.email
+
+        when {
+            sharedPrefs.getBoolean(IS_GRANTED_READ_IMAGES, false) -> profileImage.setImageURI(
+                cvObject!!.imgURI
+            )
+            else -> profileImage.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_image))
+        }
+
 
         basicInfoFragment = BasicInfoFragment.new(
-            cv.fullName!!, cv.gender!!, cv.age!!, cv.email!!
+            cvObject!!.fullName!!, cvObject!!.gender!!, cvObject!!.age!!, cvObject!!.email!!
         )
 
         val skillsFragment = SkillsFragment.new(
-            androidP = cv.skillsScore!![ANDROID_KEY]!!,
-            flutterP = cv.skillsScore!![FLUTTER_KEY]!!,
-            iosP = cv.skillsScore!![iOS_KEY]!!,
+            androidP = cvObject!!.skillsScore!![ANDROID_KEY]!!,
+            flutterP = cvObject!!.skillsScore!![FLUTTER_KEY]!!,
+            iosP = cvObject!!.skillsScore!![iOS_KEY]!!,
         )
 
         val hobbiesFragment = HobbiesFragment.new(
-            isMusic = cv.hobbies!![MUSIC]!!,
-            isGames = cv.hobbies!![GAMES]!!,
-            isSport = cv.hobbies!![SPORT]!!
+            isMusic = cvObject!!.hobbies!![MUSIC]!!,
+            isGames = cvObject!!.hobbies!![GAMES]!!,
+            isSport = cvObject!!.hobbies!![SPORT]!!
         )
 
         val languageFragment = LanguageFragment.new(
-            isArabic = cv.languages!![AR]!!,
-            isEnglish = cv.languages!![EN]!!,
-            isFrench = cv.languages!![FR]!!
+            isArabic = cvObject!!.languages!![AR]!!,
+            isEnglish = cvObject!!.languages!![EN]!!,
+            isFrench = cvObject!!.languages!![FR]!!
         )
 
         supportFragmentManager.beginTransaction().add(
@@ -117,9 +164,8 @@ class ResumePage : AppCompatActivity() {
         }
 
         careerBtn.setOnClickListener {
-            Intent(this, CareerActivity::class.java).apply {
-                startActivity(this)
-            }
+            startActivity(Intent(this, CareerActivity::class.java))
+
         }
 
 

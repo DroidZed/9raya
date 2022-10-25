@@ -4,17 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+        android:id="@+id/addEduToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/menu"
-        app:navigationIcon="@drawable/ic_baseline_home"
-        app:title="@string/title_text"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back"
+        app:title="@string/add_edu"
         app:titleMarginStart="10dp"
         app:titleTextColor="@color/white" />
-
 
 </LinearLayout>

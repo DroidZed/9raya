@@ -10,7 +10,7 @@ data class CvObject(
     var email: String? = null,
     var age: Int? = null,
     var gender: String? = null,
-    var skillsScore: HashMap<String,Int>? = null,
+    var skillsScore: HashMap<String, Int>? = null,
     var languages: HashMap<String, Boolean>? = null,
     var hobbies: HashMap<String, Boolean>? = null,
     var imgURI: Uri? = null,

@@ -9,74 +9,48 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import tn.esprit.curriculumvitaev2.R
 import tn.esprit.curriculumvitaev2.adapters.ExpAdapter
-import tn.esprit.curriculumvitaev2.utils.ListItemData
+import tn.esprit.curriculumvitaev2.dao.ExpDao
+import tn.esprit.curriculumvitaev2.entity.Experience
+import tn.esprit.curriculumvitaev2.utils.AppDataBase
 
 
 class ExpFragment : Fragment() {
 
     private lateinit var companiesRV: RecyclerView
     private lateinit var expAdapter: ExpAdapter
+    private lateinit var appDatabase: AppDataBase
+    private lateinit var companiesList: MutableList<Experience>
+    private lateinit var expDao: ExpDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v = inflater.inflate(R.layout.fragment_exp, container, false)
+        return inflater.inflate(R.layout.fragment_exp, container, false)
+    }
 
-        companiesRV = v.findViewById(R.id.companiesRV)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val companiesList = listOf(
-            ListItemData(
-                companyName = "Amazon",
-                companyAddress = "United States",
-                startDate = "01/09/2019",
-                endDate = "TODAY",
-                imageUri = R.drawable.ic_logo_amazon
-            ),
-            ListItemData(
-                companyName = "Facebook",
-                companyAddress = "France",
-                startDate = "01/09/2018",
-                endDate = "31/08/2019",
-                imageUri = R.drawable.ic_logo_facebook
-            ),
-            ListItemData(
-                companyName = "Google",
-                companyAddress = "United States",
-                startDate = "01/09/2017",
-                endDate = "31/08/2018",
-                imageUri = R.drawable.ic_logo_google
-            ),
-            ListItemData(
-                companyName = "Linkedin",
-                companyAddress = "United States",
-                startDate = "01/09/2016",
-                endDate = "31/08/2017",
-                imageUri = R.drawable.ic_logo_linkedin
-            ),
-            ListItemData(
-                companyName = "Microsoft",
-                companyAddress = "United States",
-                startDate = "01/09/2015",
-                endDate = "31/08/2016",
-                imageUri = R.drawable.ic_logo_microsoft
-            ),
-            ListItemData(
-                companyName = "Esprit",
-                companyAddress = "Tunisia",
-                startDate = "01/09/2013",
-                endDate = "31/08/2015",
-                imageUri = R.drawable.ic_logo_esprit
-            ),
+        appDatabase = AppDataBase.getDatabase(view.context)
 
-            )
+        expDao = appDatabase.expDao()
+
+        val dbItems = expDao.getAll()
+
+        companiesList = dbItems.toMutableList()
+
+        companiesRV = view.findViewById(R.id.companiesRV)
 
         expAdapter = ExpAdapter(companiesList)
 
         companiesRV.adapter = expAdapter
 
-        companiesRV.layoutManager = LinearLayoutManager(v.context)
+        companiesRV.layoutManager = LinearLayoutManager(view.context)
 
-        return v
+        if (dbItems.size > companiesList.size) {
+            companiesList.add(dbItems[companiesList.size])
+            expAdapter.notifyItemInserted(companiesList.size - 1)
+        }
     }
 }

@@ -28,6 +28,16 @@
                 android:contentDescription="@string/image"
                 android:foreground="@drawable/gradiant_overlay" />
 
+            <ImageView
+                android:id="@+id/delExp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/image"
+                card_view:srcCompat="@drawable/ic_baseline_delete"
+                tools:ignore="ImageContrastCheck" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,19 +48,21 @@
                 <TextView
                     android:id="@+id/companyName"
                     android:layout_width="wrap_content"
-                    android:textAllCaps="true"
                     android:layout_height="wrap_content"
+                    android:textAllCaps="true"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     card_view:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TextContrastCheck"
                     tools:text="company name" />
 
                 <TextView
                     android:id="@+id/companyAddress"
                     android:layout_width="wrap_content"
-                    android:textAllCaps="true"
                     android:layout_height="wrap_content"
+                    android:textAllCaps="true"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     card_view:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="TextContrastCheck"
                     tools:text="company address" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

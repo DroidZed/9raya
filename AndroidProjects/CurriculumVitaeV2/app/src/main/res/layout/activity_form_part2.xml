@@ -314,6 +314,16 @@
 
     </FrameLayout>
 
+    <CheckBox
+        android:text="@string/remember_me"
+        app:layout_constraintBottom_toTopOf="@+id/submitBtn"
+        android:id="@+id/isRememberedCbx"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobbiesLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="0dp"

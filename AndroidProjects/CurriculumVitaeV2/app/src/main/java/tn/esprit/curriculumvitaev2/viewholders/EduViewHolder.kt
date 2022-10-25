@@ -1,6 +1,7 @@
 package tn.esprit.curriculumvitaev2.viewholders
 
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ class EduViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var fDate: TextView? = null
     var cName: TextView? = null
     var cAddr: TextView? = null
+    var btnDel: ImageView? = null
 
     init {
         schoolImage = itemView.findViewById(R.id.schoolImage)
@@ -20,5 +22,6 @@ class EduViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fDate = itemView.findViewById(R.id.fDate)
         cName = itemView.findViewById(R.id.cName)
         cAddr = itemView.findViewById(R.id.cAddr)
+        btnDel = itemView.findViewById(R.id.delEdu)
     }
 }
