@@ -86,7 +86,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigate() {
-        val mainIntent = Intent(this, MainActivity::class.java)
-        startActivity(mainIntent)
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

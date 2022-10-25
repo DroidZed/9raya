@@ -18,23 +18,25 @@ public class UniversiteServiceImpl implements IUniversiteService {
 
     @Override
     public List<Universite> listAll() {
-        return null;
+        return universiteRepo.findAll();
     }
 
     @Override
     public Optional<Universite> findOneById(Long id) {
-        return Optional.empty();
+        return universiteRepo.findById(id);
     }
 
     @Override
     public Universite create(Universite universite) {
-        return null;
+        return universiteRepo.save(universite);
     }
 
     @Override
     public Universite updateOne(Long id, Universite universite) {
         return null;
     }
+
+
 
     @Override
     public void deleteOne(Long id) {
@@ -45,4 +47,6 @@ public class UniversiteServiceImpl implements IUniversiteService {
     public void deleteAll() {
 
     }
+
+    public Optional<Universite> findOneNomUniv(String nomUniv) {return universiteRepo.findByNomUniv(nomUniv);}
 }
