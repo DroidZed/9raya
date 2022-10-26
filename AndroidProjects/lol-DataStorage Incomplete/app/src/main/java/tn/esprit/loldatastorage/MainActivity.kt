@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun addToDataBase() {
+    private fun addToDataBase() {
         var champion: Champion? = null
 
         when (counter) {
@@ -127,9 +127,9 @@ class MainActivity : AppCompatActivity() {
         counter++
 
         try {
-            champsDd.champDao().addChamp(champion!!)
-            champList.add(champion)
-            recylcerChampionAdapter.notifyItemInserted(champList.size - 1)
+            champsDd.champDao().addChamp(champion!!) // persistence
+            champList.add(champion) // ajout en memoire
+            recylcerChampionAdapter.notifyItemInserted(champList.size - 1) // notif du recycler view
 
         } catch (ex: Exception) {
             Toast.makeText(this, "Could not add the champion !", Toast.LENGTH_SHORT).show()

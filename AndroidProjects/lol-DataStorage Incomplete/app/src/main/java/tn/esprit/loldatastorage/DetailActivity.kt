@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import tn.esprit.loldatastorage.data.NAME
-import tn.esprit.loldatastorage.data.PICTURE
-import tn.esprit.loldatastorage.data.ROLE
+import tn.esprit.loldatastorage.utils.NAME
+import tn.esprit.loldatastorage.utils.PICTURE
+import tn.esprit.loldatastorage.utils.ROLE
 
 class DetailActivity : AppCompatActivity() {
 
