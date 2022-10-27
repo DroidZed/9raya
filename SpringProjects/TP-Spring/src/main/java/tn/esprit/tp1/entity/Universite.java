@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,13 +20,10 @@ public class Universite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUniv;
+    private Integer idUniv;
 
     private String nomUniv;
 
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Departement> departments;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private DetailEquipe detailEquipe;
+    private Set<Departement> departments;
 }

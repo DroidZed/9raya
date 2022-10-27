@@ -22,17 +22,19 @@ public class Etudiant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEtudiant;
+    private Integer idEtudiant;
 
     private String nom, prenom;
 
     @Enumerated(EnumType.ORDINAL)
     private Option option;
 
-    @ManyToOne
     @JsonIgnore
+    @JoinColumn(name = "id_depart")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Departement departement;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "etudiant_equipe",
@@ -41,6 +43,6 @@ public class Etudiant implements Serializable {
     )
     private Set<Equipe> equipes;
 
-    @OneToMany(mappedBy = "etudiant")
+    @OneToMany(mappedBy = "etudiant", fetch = FetchType.EAGER)
     private List<Contrat> contrats;
 }

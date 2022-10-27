@@ -20,19 +20,17 @@ public class Equipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEquipe;
+    private Integer idEquipe;
 
     private String nomEquipe;
 
     @Enumerated(EnumType.ORDINAL)
     private Niveau niveau;
 
-    @ManyToMany(mappedBy = "equipes")
+    @ManyToMany(mappedBy = "equipes", fetch = FetchType.EAGER)
     private Set<Etudiant> etudiants;
 
-    @OneToOne(mappedBy = "equipe")
+    @OneToOne(targetEntity = DetailEquipe.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_equipe")
     private DetailEquipe detailEquipe;
-
-    @ManyToOne
-    private Etudiant etudiant;
 }

@@ -1,70 +1,57 @@
 package tn.esprit.tp1.services.contrat;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tn.esprit.tp1.entity.Contrat;
 import tn.esprit.tp1.exceptions.ContratNotFoundException;
 import tn.esprit.tp1.repository.ContratRepo;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@Slf4j
 @AllArgsConstructor
 public class ContratServiceImpl implements IContratService {
 
     private final ContratRepo contratRepository;
 
     @Override
-    public List<Contrat> listAll() {
-        List<Contrat> list = contratRepository.findAll();
+    public List<Contrat> retrieveAllContrats() {
 
-        list.forEach(contrat -> log.info("Contrat: " + contrat.toString()));
-
-        return list;
+        return contratRepository.findAll();
     }
 
     @Override
-    public Optional<Contrat> findOneById(Long id) {
-        return contratRepository.findById(id);
+    public Contrat retrieveContrat(Integer idContrat) {
+        return contratRepository.findById(idContrat).orElseThrow(() -> new ContratNotFoundException(idContrat));
     }
 
     @Override
-    public Contrat create(Contrat contrat) {
+    public Contrat addContrat(Contrat contrat) {
         return contratRepository.save(contrat);
     }
 
     @Override
-    public Contrat updateOne(Long id, Contrat newContrat) {
+    public Contrat updateContrat(Contrat contrat) {
 
-        return contratRepository.findById(id)
-                .map(contrat -> {
+        return contratRepository.findById(contrat.getIdContrat())
+                .map(ctr -> {
 
-                    contrat.setDateFinContrat(newContrat.getDateFinContrat());
-                    contrat.setArchive(newContrat.getArchive());
-                    contrat.setSpecialite(newContrat.getSpecialite());
+                    contrat.setDateFinContrat(ctr.getDateFinContrat());
+                    contrat.setSpecialite(ctr.getSpecialite());
+                    contrat.setDateDebutContrat(ctr.getDateDebutContrat());
 
                     return contratRepository.save(contrat);
 
-                }).orElseThrow(() -> new ContratNotFoundException(id));
+                }).orElseThrow(() -> new ContratNotFoundException(contrat.getIdContrat()));
     }
 
     @Override
-    public void deleteOne(Long id) {
+    public void removeContrat(Integer idContrat) {
 
-        Optional<Contrat> c = contratRepository.findById(id);
-
-        if (!c.isPresent())
-            throw new ContratNotFoundException(id);
+        if (!contratRepository.existsById(idContrat))
+            throw new ContratNotFoundException(idContrat);
 
         else
-            contratRepository.delete(c.get());
-    }
-
-    @Override
-    public void deleteAll() {
-        contratRepository.deleteAll();
+            contratRepository.deleteById(idContrat);
     }
 }

@@ -1,6 +1,6 @@
 package tn.esprit.tp1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,10 +21,10 @@ public class Departement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idDepart;
+    private Integer idDepart;
 
     private String nomDepart;
 
-    @OneToMany(mappedBy = "departement")
+    @OneToMany(mappedBy = "departement", fetch = FetchType.EAGER)
     private List<Etudiant> etudiants;
 }

@@ -22,21 +22,21 @@ public class Contrat implements Serializable {
     @Id
     @Column(name = "id_contrat")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idContrat;
+    private Integer idContrat;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_debut_contrat")
     private Date dateDebutContrat;
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "date_fin_contrat")
     private Date dateFinContrat;
 
     @Enumerated(EnumType.ORDINAL)
     private Specialite specialite;
 
-    private Boolean archive;
-
     @JsonIgnore
-    @ManyToOne
+    @JoinColumn(name = "id_etudiant")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Etudiant etudiant;
 }

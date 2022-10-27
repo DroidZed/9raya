@@ -1,5 +1,6 @@
 package tn.esprit.tp1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,10 +19,11 @@ public class DetailEquipe implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private Long salle;
+    private Integer salle;
 
     private String thematique;
 
-    @OneToOne(targetEntity = Equipe.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToOne(mappedBy = "detailEquipe", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Equipe equipe;
 }

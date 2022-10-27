@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import tn.esprit.tp1.entity.Contrat;
 
 @Repository
-public interface ContratRepo extends JpaRepository<Contrat, Long> {
+public interface ContratRepo extends JpaRepository<Contrat, Integer> {
 }
