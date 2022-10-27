@@ -22,7 +22,6 @@ class EduFragment : Fragment() {
     private lateinit var schoolsList: MutableList<Education>
     private lateinit var eduDao: EduDao
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
