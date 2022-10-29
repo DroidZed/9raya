@@ -24,7 +24,7 @@ export async function publishGame(req, res) {
         description: req.body.description,
         price: req.body.price,
         quantity: req.body.quantity,
-        image: `${req.protocol}://${req.get('host')}/images/${
+        image: `${req.protocol}://${req.get('host')}/images/games/${
             req.file.filename
         }`,
     })

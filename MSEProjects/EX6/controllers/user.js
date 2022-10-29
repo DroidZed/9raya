@@ -28,6 +28,9 @@ export async function register(req, res) {
             username: username,
             password: password,
             wallet: wallet,
+            avatar: `${req.protocol}://${req.get('host')}/images/users/${
+                req.file.filename
+            }`,
         })
         res.status(201).json(newUser)
     }

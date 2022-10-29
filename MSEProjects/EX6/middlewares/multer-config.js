@@ -12,8 +12,8 @@ const MIME_TYPES = {
     'image/gif': 'gif',
 }
 
-const mutlerConfig = (req, file, path, fileSizeLimit) =>
-    multer({
+export default function (req, file, path, fileSizeLimit) {
+    return multer({
         storage: diskStorage({
             destination: (req, file, callback) => {
                 const _dirname = dirname(fileURLToPath(import.meta.url))
@@ -29,9 +29,4 @@ const mutlerConfig = (req, file, path, fileSizeLimit) =>
             fileSize: fileSizeLimit,
         },
     }).single('image')
-
-export const gameImageConfig = (req, file) =>
-    mutlerConfig(req, file, 'games', 10 * 1024 * 1024)
-
-export const userImageConfig = (req, file) =>
-    mutlerConfig(req, file, 'users', 5 * 1024)
+}

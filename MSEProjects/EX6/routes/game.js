@@ -11,7 +11,7 @@ import {
 } from '../controllers/game.js'
 
 import { body } from 'express-validator'
-import { gameImageConfig } from '../middlewares/multer-config.js'
+import multer from '../middlewares/multer-config.js'
 
 const router = express.Router()
 
@@ -24,7 +24,7 @@ router
         body('price').isNumeric(),
         body('description').isLength({ min: 10 }),
         body('quantity').isNumeric(),
-        gameImageConfig,
+        multer('games', 10 * 1024 * 1024),
         publishGame
     )
 
@@ -38,7 +38,7 @@ router
         body('price').isNumeric(),
         body('description').isLength({ min: 10 }),
         body('quantity').isNumeric(),
-        gameImageConfig,
+        multer('games', 10 * 1024 * 1024),
         modifyGame
     )
 

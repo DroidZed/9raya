@@ -3,7 +3,7 @@ import { body } from 'express-validator'
 import mongoose from 'mongoose'
 
 import { login, register } from '../controllers/user.js'
-import { userImageConfig } from '../middlewares/multer-config.js'
+import multer from '../middlewares/multer-config.js'
 
 const router = express.Router()
 
@@ -17,7 +17,7 @@ router
         body('username').isLength({ min: 3, max: 100 }),
         body('password').isLength({ min: 8 }),
         body('wallet').isNumeric(),
-        userImageConfig,
+        multer('users', 5 * 1024),
         register
     )
 
