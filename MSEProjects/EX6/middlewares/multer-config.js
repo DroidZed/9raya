@@ -28,7 +28,7 @@ const mutlerConfig = (req, file, path, fileSizeLimit) =>
         limits: {
             fileSize: fileSizeLimit,
         },
-    })
+    }).single('image')
 
 export const gameImageConfig = (req, file) =>
     mutlerConfig(req, file, 'games', 10 * 1024 * 1024)
