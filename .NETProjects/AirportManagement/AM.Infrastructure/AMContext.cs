@@ -17,7 +17,7 @@ namespace AM.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;
-Initial Catalog=AymenDhahriDB;Integrated Security=true");
+Initial Catalog=YourUserName;Integrated Security=true");
             base.OnConfiguring(optionsBuilder);
         }
 
