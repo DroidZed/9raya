@@ -28,9 +28,9 @@ namespace AM.ApplicationCore.Domain
         [RegularExpression(@"^[0-9]{8}$")]
         public string TelNumber { get; set; }
 
-        public ICollection<Flight> Flights { get; set; }
+        // public ICollection<Flight> Flights { get; set; }
 
-        public ICollection<Ticket> Tickets { get; set; }
+        public virtual IList<Ticket> Tickets { get; set; }
 
         public bool CheckProfile(string fName, string lName)
         {

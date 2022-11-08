@@ -93,12 +93,12 @@
             Destination= "Paris",
             MyPlane= PlaneA,
             EstimatedDuration=110,
-            Passengers= new List<Passenger> { Traveller1,
+           /* Passengers= new List<Passenger> { Traveller1,
                 Traveller2, 
                 Traveller3, 
                 Traveller4,
                 Traveller5
-            }
+            }*/
         };
 
         public static Flight Flight2= new Flight

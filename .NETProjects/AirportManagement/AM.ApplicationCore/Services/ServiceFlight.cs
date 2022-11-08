@@ -91,13 +91,15 @@ namespace AM.ApplicationCore.Services
                     .ToList();
         }
 
-        public List<Passenger> SeniorTravellers(Flight flight)
+        /*
+         * public List<Passenger> SeniorTravellers(Flight flight)
         {
             IEnumerable<Passenger> q = 
                     flight.Passengers!.OfType<Traveller>().OrderBy(p => p.BirthDate).Take(3);
 
             return q.ToList();
         }
+        */
 
         public void DestinationGroupedFlights()
         {

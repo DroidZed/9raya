@@ -15,7 +15,7 @@ namespace AM.ApplicationCore.Domain
 
         public PlaneType PlaneType { get; set; }
 
-        public ICollection<Flight>? Flights { get; set; }
+        public virtual IList<Flight>? Flights { get; set; }
 
         public override string ToString()
         {
