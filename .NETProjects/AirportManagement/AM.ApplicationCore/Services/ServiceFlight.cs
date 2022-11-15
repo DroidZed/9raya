@@ -3,9 +3,31 @@ using AM.ApplicationCore.Interfaces;
 
 namespace AM.ApplicationCore.Services
 {
-    public class ServiceFlight : IServiceFlight
+    public class ServiceFlight : Services<Flight>, IServiceFlight
     {
-        public List<Flight> Flights { get; set; } = new List<Flight>();
+        public List<Flight> Flights  => GetAll().ToList();
+
+        private IUnitOfWork _unitOfWork;
+        public Action<Plane> FlightDetailsDel;
+        public Func<string, double?> DurationAverageDel;
+
+        public ServiceFlight(IUnitOfWork unitOfWork): base(unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+            // FlightDetailsDel = ShowFlightDetails;
+            // DurationAverageDel = DurationAverage;
+            FlightDetailsDel = (plane) => ShowFlightDetails(plane);
+            DurationAverageDel = (dest) =>
+            {
+                double? avg = (
+                 from flight in Flights
+                 where flight.Destination!.Equals(dest)
+                 select flight.EstimatedDuration
+             ).Average();
+
+                return avg;
+            };
+        }
 
         public List<DateTime>? GetFlightDates(string destination)
         {
@@ -114,26 +136,6 @@ namespace AM.ApplicationCore.Services
                 }
                 Console.WriteLine();
             }
-        }
-
-        public Action<Plane> FlightDetailsDel;
-        public Func<string, double?> DurationAverageDel;
-
-        public ServiceFlight()
-        {
-            // FlightDetailsDel = ShowFlightDetails;
-            // DurationAverageDel = DurationAverage;
-            FlightDetailsDel = (plane) => ShowFlightDetails(plane);
-            DurationAverageDel = (dest) =>
-            {
-                double? avg = (
-                 from flight in Flights
-                 where flight.Destination!.Equals(dest)
-                 select flight.EstimatedDuration
-             ).Average();
-
-                return avg;
-            };
         }
     }
 }

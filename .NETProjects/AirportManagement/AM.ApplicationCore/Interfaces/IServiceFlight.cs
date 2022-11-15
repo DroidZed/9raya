@@ -2,7 +2,7 @@
 
 namespace AM.ApplicationCore.Interfaces
 {
-    public interface IServiceFlight
+    public interface IServiceFlight: IServices<Flight>
     {
         List<DateTime>? GetFlightDates(string destination);
 
@@ -15,8 +15,6 @@ namespace AM.ApplicationCore.Interfaces
         double? DurationAverage(string destination);
 
         List<Flight> OrderedDurationFlights();
-
-       // List<Passenger> SeniorTravellers(Flight flight);
 
         void DestinationGroupedFlights();
     }
