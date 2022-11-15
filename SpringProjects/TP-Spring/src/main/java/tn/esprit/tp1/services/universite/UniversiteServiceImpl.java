@@ -63,7 +63,6 @@ public class UniversiteServiceImpl implements IUniversiteService {
 
         log.info("Universite departments: " + uni.getDepartments().toString());
 
-        // universiteRepo.save(uni);
-
+        universiteRepo.save(uni);
     }
 }

@@ -40,4 +40,9 @@ public class DepartementServiceImpl implements IDepartementService {
     public Departement retrieveDepartement(Integer idDepart) {
         return departementRepo.findById(idDepart).orElseThrow(() -> new DepartementNotFoundException(idDepart));
     }
+
+    @Override
+    public List<Departement> retrieveDepartementsByUniversite(Integer idUniversite) {
+        return null;
+    }
 }

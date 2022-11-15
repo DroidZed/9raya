@@ -1,5 +1,6 @@
 package tn.esprit.tp1.services.etudiant;
 
+import tn.esprit.tp1.entity.Contrat;
 import tn.esprit.tp1.entity.Etudiant;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface IEtudiantService {
 
     void assignEtudiantToDepartement(Integer etudiantId, Integer departementId);
 
+    Contrat affectContratToEtudiant (Contrat ce, String nomE, String prenomE);
+
+    List<Etudiant> getEtudiantsByDepartement (Integer idDepartement);
 }

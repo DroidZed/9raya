@@ -2,6 +2,7 @@ package tn.esprit.tp1.services.etudiant;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.tp1.entity.Contrat;
 import tn.esprit.tp1.entity.Departement;
 import tn.esprit.tp1.entity.Etudiant;
 import tn.esprit.tp1.exceptions.DepartementNotFoundException;
@@ -9,6 +10,7 @@ import tn.esprit.tp1.exceptions.EtudiantNotFoundException;
 import tn.esprit.tp1.repository.EtudiantRepo;
 import tn.esprit.tp1.services.departement.DepartementServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -73,5 +75,31 @@ public class EtudiantServiceImpl implements IEtudiantService {
 
     }
 
+    @Override
+    public Contrat affectContratToEtudiant(Contrat ce, String nomE, String prenomE) {
+        Etudiant e = etudiantRepo.findByNomAndPrenom(nomE, prenomE);
 
+        if (e == null)
+            return null;
+
+
+        if (e.getContrats().size() == 5)
+            return null;
+
+        e.getContrats().add(ce);
+
+        e.setContrats(e.getContrats());
+
+        return ce;
+    }
+
+    @Override
+    public List<Etudiant> getEtudiantsByDepartement(Integer idDepartement) {
+
+        Departement d = departementService.retrieveDepartement(idDepartement);
+
+        if (d == null) return new ArrayList<>();
+
+        return etudiantRepo.findAllByDepartement(d);
+    }
 }

@@ -13,4 +13,6 @@ public interface IDepartementService {
     Departement updateDepartement(Departement d);
 
     Departement retrieveDepartement(Integer idDepart);
+
+    List<Departement> retrieveDepartementsByUniversite(Integer idUniversite);
 }

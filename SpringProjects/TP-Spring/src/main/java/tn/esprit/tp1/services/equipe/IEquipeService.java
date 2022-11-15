@@ -1,5 +1,6 @@
 package tn.esprit.tp1.services.equipe;
 
+import org.springframework.http.ResponseEntity;
 import tn.esprit.tp1.entity.Equipe;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface IEquipeService {
     Equipe updateEquipe(Equipe e);
 
     Equipe retrieveEquipe(Integer idEquipe);
+
+    ResponseEntity<?> deleteEquipe(Integer idEquipe);
 }

@@ -15,15 +15,22 @@ public class EquipeController {
     private final EquipeServiceImpl equipeService;
 
     @GetMapping("")
-    public ResponseEntity<?> getAllEquipes() {
+    public ResponseEntity<?> retrieveAllEquipes() {
         return new ResponseEntity<>(equipeService.retrieveAllEquipes(), HttpStatus.OK);
     }
 
-    @PostMapping("/addEquipe")
+    @PostMapping( "/addEquipe")
     public ResponseEntity<?> addEquipe(@RequestBody Equipe e) {
 
         Equipe equipe = equipeService.addEquipe(e);
 
         return new ResponseEntity<>(equipe, equipe != null ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST);
     }
+
+    @DeleteMapping("/{idEquipe}")
+    public ResponseEntity<?> deleteEquipe(@PathVariable("idEquipe") Integer idEquipe) {
+        return equipeService.deleteEquipe(idEquipe);
+    }
+
+
 }

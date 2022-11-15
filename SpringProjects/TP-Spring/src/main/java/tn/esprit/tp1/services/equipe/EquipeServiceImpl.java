@@ -1,6 +1,8 @@
 package tn.esprit.tp1.services.equipe;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tn.esprit.tp1.entity.Equipe;
 import tn.esprit.tp1.exceptions.DetailEquipeAlreadyExistsException;
@@ -8,6 +10,7 @@ import tn.esprit.tp1.exceptions.EquipeNotFoundException;
 import tn.esprit.tp1.repository.DetailEquipeRepo;
 import tn.esprit.tp1.repository.EquipeRepo;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -23,6 +26,7 @@ public class EquipeServiceImpl implements IEquipeService {
     }
 
     @Override
+    @Transactional
     public Equipe addEquipe(Equipe e) {
 
         Integer salle = e.getDetailEquipe().getSalle();
@@ -48,5 +52,15 @@ public class EquipeServiceImpl implements IEquipeService {
     @Override
     public Equipe retrieveEquipe(Integer idEquipe) {
         return equipeRepo.findById(idEquipe).orElseThrow(() -> new EquipeNotFoundException(idEquipe));
+    }
+
+    @Override
+    public ResponseEntity<?> deleteEquipe(Integer idEquipe) {
+
+        if (!equipeRepo.existsById(idEquipe))
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        equipeRepo.deleteById(idEquipe);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
