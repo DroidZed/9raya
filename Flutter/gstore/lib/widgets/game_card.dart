@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gstore/screens/game_details.dart';
 
-class GameCard extends StatelessWidget {
-  final String _path;
-  final String _title;
-  final int _price;
+import '../data/game.dart';
 
-  const GameCard(this._path, this._title, this._price, {super.key});
+class GameCard extends StatelessWidget {
+  final Game gameData;
+
+  const GameCard(this.gameData, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,8 @@ class GameCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => GameDetails(_path, _title, _price),
+            builder: (context) =>
+                GameDetails(gameData.path, gameData.title, gameData.price),
           ),
         );
       },
@@ -24,7 +25,7 @@ class GameCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               child: Image.asset(
-                _path,
+                gameData.path,
                 height: 90,
                 width: 180,
               ),
@@ -34,12 +35,12 @@ class GameCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_title,
+                  Text(gameData.title,
                       style: const TextStyle(
                           fontSize: 25,
                           color: Colors.indigo,
                           fontWeight: FontWeight.bold)),
-                  Text("$_price DT",
+                  Text("${gameData.price} DT",
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.w400))
                 ],

@@ -13,7 +13,7 @@ class Button extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPress,
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
               EdgeInsets.all(padding)),
         ),
