@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gstore/screens/game_details.dart';
 
 import '../data/game.dart';
+import '../screens/game_details.dart';
 
 class GameCard extends StatelessWidget {
   final Game gameData;
@@ -12,10 +12,10 @@ class GameCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
+        Navigator.push(
+          context,
           MaterialPageRoute(
-            builder: (context) =>
-                GameDetails(gameData.path, gameData.title, gameData.price),
+            builder: (context) => GameDetails(gameData),
           ),
         );
       },

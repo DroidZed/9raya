@@ -1,51 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:gstore/screens/signup_form.dart';
+// import 'package:gstore/screens/signup_form.dart';
 
+import '../data/game.dart';
 import '../widgets/button.dart';
+import './signup_form.dart';
 
-class GameDetails extends StatelessWidget {
-  const GameDetails(this._image, this._title, this._price, {super.key});
+class GameDetails extends StatefulWidget {
+  const GameDetails(this.gameDetails, {super.key});
 
-  final String _image;
-  final String _title;
-  final int _price;
+  final Game gameDetails;
+
+  @override
+  State<GameDetails> createState() => _GameDetailsState();
+}
+
+class _GameDetailsState extends State<GameDetails> {
+  int gameQte = 0;
+
+  @override
+  void initState() {
+    gameQte = widget.gameDetails.qte;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text(_title),
+          title: Text(widget.gameDetails.title),
           backgroundColor: Colors.deepPurple,
         ),
         body: Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              Image.asset(_image, height: 300, width: 500),
-              const Text(
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+              Image.asset(widget.gameDetails.path,
+                  height: 300, width: double.maxFinite),
+              Text(
+                widget.gameDetails.description,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 50),
-                child: Text(
-                  "$_price DT",
-                  style: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.w400),
+                child: Column(
+                  children: [
+                    Text(
+                      "${widget.gameDetails.price} DT",
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      gameQte > 0 ? "Examplaires: $gameQte" : "Hors stock",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w400),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                width: double.maxFinite,
-                child: Button(
-                    content: const Text("Acheter"),
-                    onPress: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpScreen(),
-                        ),
-                      );
-                    }),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Button(
+                      content: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Icon(Icons.shopping_cart),
+                          Text("Acheter"),
+                        ],
+                      ),
+                      onPress: () {
+                        setState(() {
+                          gameQte--;
+                        });
+                      }),
+                  Button(
+                      content: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Icon(Icons.app_registration),
+                          Text("S'inscrire"),
+                        ],
+                      ),
+                      onPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpScreen()),
+                        );
+                      })
+                ],
+              ),
             ],
           ),
         ),

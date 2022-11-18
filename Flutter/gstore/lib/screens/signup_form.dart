@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../widgets/button.dart';
 import '../widgets/date_picker_input.dart';
 import '../widgets/input.dart';
+import '../widgets/password_input.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               backgroundColor: Colors.deepPurple,
             ),
             body: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Center(
                     child: SingleChildScrollView(
                   child: Column(
@@ -36,10 +37,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           action: TextInputAction.next,
                           label: 'Email',
                           keyboard: TextInputType.emailAddress),
-                      const Input(
-                          action: TextInputAction.next,
-                          label: 'Mot de passe',
-                          secure: true),
+                      const PasswordInput(
+                          action: TextInputAction.next, label: 'Mot de passe'),
                       const DatePickerInput(label: 'Année de naissance'),
                       const Input(
                           action: TextInputAction.done,

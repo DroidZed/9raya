@@ -5,12 +5,7 @@ class Game {
   final String description;
   final int qte;
 
-  Game(
-      {required this.path,
-      required this.title,
-      required this.price,
-      this.description = "",
-      this.qte = 10});
+  Game(this.path, this.title, this.price, this.description, this.qte);
 
   // generate toString
   @override
