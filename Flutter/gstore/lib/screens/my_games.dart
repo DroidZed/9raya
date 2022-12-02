@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../data/game.dart';
 import '../widgets/game_card.dart';
 
-class GamesList extends StatefulWidget {
-  const GamesList({Key? key}) : super(key: key);
+class MyGamesScreen extends StatefulWidget {
+  const MyGamesScreen({super.key});
 
   @override
-  State<GamesList> createState() => _GamesListState();
+  State<MyGamesScreen> createState() => _MyGamesScreenState();
 }
 
-class _GamesListState extends State<GamesList> {
+class _MyGamesScreenState extends State<MyGamesScreen> {
   List<Game> games = [];
 
   String desc =
@@ -32,10 +32,16 @@ class _GamesListState extends State<GamesList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisExtent: 210,
+        mainAxisSpacing: 5,
+        crossAxisSpacing: 5,
+      ),
       itemCount: games.length,
       itemBuilder: (context, index) {
-        return GameCard(games[index], false);
+        return GameCard(games[index], true);
       },
     );
   }

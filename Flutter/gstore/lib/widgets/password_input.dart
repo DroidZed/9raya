@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 
 class PasswordInput extends StatefulWidget {
-  const PasswordInput({this.label, this.keyboard, super.key, this.action});
+  PasswordInput({
+    this.label,
+    this.keyboard,
+    this.validator,
+    this.onSaved,
+    this.action,
+    super.key,
+  });
 
   final String? label;
   final TextInputType? keyboard;
   final TextInputAction? action;
+  void Function(String?)? onSaved;
+  String? Function(String?)? validator;
 
   @override
   State<PasswordInput> createState() => _PasswordInputState();
@@ -29,7 +38,9 @@ class _PasswordInputState extends State<PasswordInput> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Expanded(
-        child: TextField(
+        child: TextFormField(
+          onSaved: widget.onSaved,
+          validator: widget.validator,
           textInputAction: widget.action,
           obscureText: true,
           keyboardType: widget.keyboard,
