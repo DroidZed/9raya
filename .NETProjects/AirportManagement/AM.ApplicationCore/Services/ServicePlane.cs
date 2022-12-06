@@ -1,4 +1,5 @@
-﻿using AM.ApplicationCore.Domain;
+﻿using System;
+using AM.ApplicationCore.Domain;
 using AM.ApplicationCore.Interfaces;
 
 namespace AM.ApplicationCore.Services
@@ -7,14 +8,15 @@ namespace AM.ApplicationCore.Services
     {
         private IUnitOfWork _unitOfWork;
 
-        public ServicePlane(IUnitOfWork unitOfWork): base(unitOfWork)
+        public ServicePlane(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            // _unitOfWork = unitOfWork;
         }
 
         public void DeletePlanes()
         {
             // it does not work :(
+            Delete(where: p => (DateTime.Now - p.ManufactureDate).TotalDays > 3650);
         }
 
         public IEnumerable<Flight> GetFlights(int n)
@@ -26,7 +28,7 @@ namespace AM.ApplicationCore.Services
                     .OrderBy(f => f.Departure);
         }
 
-        public IEnumerable<Passenger> GetPassengersByPlane(Plane p)
+        public IEnumerable<Passenger>? GetPassengersByPlane(Plane p)
         {
             return GetById(p.PlaneId)
                 .Flights

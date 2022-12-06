@@ -10,9 +10,10 @@ namespace AM.Infrastructure
         private Type _RepoType;
         private bool disposedValue;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(DbContext context, Type repoType)
         {
             _context = context;
+            _RepoType = repoType;
         }
 
         public IGenericRepository<T> GenerateRepo<T>() where T : class

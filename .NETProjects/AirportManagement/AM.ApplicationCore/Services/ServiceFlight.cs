@@ -13,7 +13,7 @@ namespace AM.ApplicationCore.Services
 
         public ServiceFlight(IUnitOfWork unitOfWork): base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            // _unitOfWork = unitOfWork;
             // FlightDetailsDel = ShowFlightDetails;
             // DurationAverageDel = DurationAverage;
             FlightDetailsDel = (plane) => ShowFlightDetails(plane);

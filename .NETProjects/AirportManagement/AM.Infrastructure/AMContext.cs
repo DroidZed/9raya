@@ -18,7 +18,7 @@ namespace AM.Infrastructure
         {
 
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;
-Initial Catalog=AymenDhahriDB;Integrated Security=true");
+Initial Catalog=AymenDhahriDB;Integrated Security=true;Multiple Active Result Sets=true");
             base.OnConfiguring(optionsBuilder);
             
             optionsBuilder.UseLazyLoadingProxies();
