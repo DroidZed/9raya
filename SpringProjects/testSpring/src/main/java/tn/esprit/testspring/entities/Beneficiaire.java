@@ -3,6 +3,7 @@ package tn.esprit.testspring.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,8 @@ public class Beneficiaire {
 
     @OneToMany(
             mappedBy = "beneficiaire",
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
     )
-    private Set<Assurance> assurances;
+    private Set<Assurance> assurances = new HashSet<>();
 }

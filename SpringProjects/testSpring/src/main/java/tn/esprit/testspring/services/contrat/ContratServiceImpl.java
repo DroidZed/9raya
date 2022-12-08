@@ -4,14 +4,23 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import tn.esprit.testspring.entities.Assurance;
+import tn.esprit.testspring.entities.Beneficiaire;
 import tn.esprit.testspring.entities.Contrat;
+import tn.esprit.testspring.repositories.BeneficiaireRepo;
 import tn.esprit.testspring.repositories.ContratRepo;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class ContratServiceImpl implements ContratService {
 
     private final ContratRepo contratRepo;
+    private final BeneficiaireRepo beneficiaireRepo;
 
     @Override
     public Contrat ajouterContrat(Contrat c) {
@@ -33,8 +42,19 @@ public class ContratServiceImpl implements ContratService {
     @Override
     public Contrat getContratBf(int idBf) {
 
+        Beneficiaire bf = beneficiaireRepo.findById(idBf).orElse(null);
 
+        if (bf == null) return null;
 
+        Set<Assurance> bfAssurances = bf.getAssurances();
+
+        List<Contrat> contratList = new ArrayList<>();
+
+        bfAssurances.forEach(a -> contratList.add(a.getContrat()));
+
+        contratList.sort(Collections.reverseOrder());
+
+        return contratList.get(0);
     }
 
     @Override

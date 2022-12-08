@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "contrat")
-public class Contrat {
+public class Contrat implements Comparable<Contrat> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,11 @@ public class Contrat {
     @Temporal(TemporalType.DATE)
     private Date dateEffet;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private TypeContrat typeContrat;
+
+    @Override
+    public int compareTo(Contrat o) {
+        return getDateEffet().compareTo(o.dateEffet);
+    }
 }
