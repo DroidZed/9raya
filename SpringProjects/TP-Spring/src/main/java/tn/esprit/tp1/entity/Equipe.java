@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,7 +29,7 @@ public class Equipe implements Serializable {
     private Niveau niveau;
 
     @ManyToMany(mappedBy = "equipes", fetch = FetchType.EAGER)
-    private Set<Etudiant> etudiants;
+    private Set<Etudiant> etudiants = new HashSet<>();
 
     @OneToOne(targetEntity = DetailEquipe.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_equipe")

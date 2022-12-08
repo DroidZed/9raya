@@ -23,4 +23,6 @@ public interface IEtudiantService {
     Contrat affectContratToEtudiant (Contrat ce, String nomE, String prenomE);
 
     List<Etudiant> getEtudiantsByDepartement (Integer idDepartement);
+
+    Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Integer idContrat, Integer idEquipe);
 }

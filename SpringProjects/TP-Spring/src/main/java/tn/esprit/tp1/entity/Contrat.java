@@ -35,6 +35,10 @@ public class Contrat implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private Specialite specialite;
 
+    private Boolean archive;
+
+    private Integer montantContrat;
+
     @JsonIgnore
     @JoinColumn(name = "id_etudiant")
     @ManyToOne(fetch = FetchType.LAZY)

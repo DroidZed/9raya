@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import tn.esprit.tp1.entity.Departement;
 import tn.esprit.tp1.exceptions.DepartementNotFoundException;
 import tn.esprit.tp1.repository.DepartementRepo;
+import tn.esprit.tp1.services.universite.UniversiteServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,6 +15,7 @@ import java.util.List;
 public class DepartementServiceImpl implements IDepartementService {
 
     private final DepartementRepo departementRepo;
+    private final UniversiteServiceImpl universiteService;
 
     @Override
     public List<Departement> retrieveAllDepartements() {
@@ -43,6 +46,8 @@ public class DepartementServiceImpl implements IDepartementService {
 
     @Override
     public List<Departement> retrieveDepartementsByUniversite(Integer idUniversite) {
-        return null;
+        return new ArrayList<>(universiteService
+                .retrieveUniversite(idUniversite)
+                .getDepartments());
     }
 }

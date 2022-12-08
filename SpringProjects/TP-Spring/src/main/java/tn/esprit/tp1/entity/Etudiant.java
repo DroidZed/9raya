@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,8 +43,8 @@ public class Etudiant implements Serializable {
             joinColumns = @JoinColumn(name = "id_etudiant"),
             inverseJoinColumns = @JoinColumn(name = "id_equipe")
     )
-    private Set<Equipe> equipes;
+    private Set<Equipe> equipes = new HashSet<>();
 
     @OneToMany(mappedBy = "etudiant", fetch = FetchType.EAGER)
-    private List<Contrat> contrats;
+    private List<Contrat> contrats = new ArrayList<>();
 }

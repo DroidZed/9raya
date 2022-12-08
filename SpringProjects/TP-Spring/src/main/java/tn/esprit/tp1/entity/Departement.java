@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,5 +27,5 @@ public class Departement implements Serializable {
     private String nomDepart;
 
     @OneToMany(mappedBy = "departement", fetch = FetchType.EAGER)
-    private List<Etudiant> etudiants;
+    private List<Etudiant> etudiants = new ArrayList<>();
 }

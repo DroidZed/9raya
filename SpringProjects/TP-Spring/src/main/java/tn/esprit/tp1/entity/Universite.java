@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,6 +26,6 @@ public class Universite implements Serializable {
 
     private String nomUniv;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Departement> departments;
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Departement> departments = new HashSet<>();
 }

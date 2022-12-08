@@ -2,6 +2,7 @@ package tn.esprit.tp1.services.contrat;
 
 import tn.esprit.tp1.entity.Contrat;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IContratService {
@@ -15,4 +16,8 @@ public interface IContratService {
     Contrat retrieveContrat(Integer idContrat);
 
     void removeContrat(Integer idContrat);
+
+    float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate);
+
+    Integer nbContratsValides(Date startDate, Date endDate);
 }

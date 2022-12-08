@@ -7,8 +7,8 @@ import tn.esprit.tp1.entity.Departement;
 import tn.esprit.tp1.entity.Universite;
 import tn.esprit.tp1.exceptions.DepartementNotFoundException;
 import tn.esprit.tp1.exceptions.UniversiteNotFoundException;
+import tn.esprit.tp1.repository.DepartementRepo;
 import tn.esprit.tp1.repository.UniversiteRepo;
-import tn.esprit.tp1.services.departement.DepartementServiceImpl;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class UniversiteServiceImpl implements IUniversiteService {
 
     private final UniversiteRepo universiteRepo;
-    private final DepartementServiceImpl departementService;
+    private final DepartementRepo departementRepo;
 
     @Override
     public List<Universite> retrieveAllUniversites() {
@@ -55,7 +55,7 @@ public class UniversiteServiceImpl implements IUniversiteService {
 
         if (uni == null) throw new UniversiteNotFoundException(idUniversite);
 
-        Departement depart = departementService.retrieveDepartement(idDepartement);
+        Departement depart = departementRepo.findById(idDepartement).orElse(null);
 
         if (depart == null) throw new DepartementNotFoundException(idDepartement);
 

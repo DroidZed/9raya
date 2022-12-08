@@ -4,12 +4,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tp1.entity.Contrat;
 import tn.esprit.tp1.entity.Departement;
+import tn.esprit.tp1.entity.Equipe;
 import tn.esprit.tp1.entity.Etudiant;
 import tn.esprit.tp1.exceptions.DepartementNotFoundException;
 import tn.esprit.tp1.exceptions.EtudiantNotFoundException;
 import tn.esprit.tp1.repository.EtudiantRepo;
+import tn.esprit.tp1.services.contrat.ContratServiceImpl;
 import tn.esprit.tp1.services.departement.DepartementServiceImpl;
+import tn.esprit.tp1.services.equipe.EquipeServiceImpl;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +23,10 @@ public class EtudiantServiceImpl implements IEtudiantService {
 
     private final EtudiantRepo etudiantRepo;
     private final DepartementServiceImpl departementService;
+
+    private final ContratServiceImpl contratService;
+
+    private final EquipeServiceImpl equipeService;
 
     @Override
     public List<Etudiant> retrieveAllEtudiants() {
@@ -72,19 +80,15 @@ public class EtudiantServiceImpl implements IEtudiantService {
         etudiant.setDepartement(depart);
 
         etudiantRepo.save(etudiant);
-
     }
 
     @Override
     public Contrat affectContratToEtudiant(Contrat ce, String nomE, String prenomE) {
         Etudiant e = etudiantRepo.findByNomAndPrenom(nomE, prenomE);
 
-        if (e == null)
-            return null;
+        if (e == null) return null;
 
-
-        if (e.getContrats().size() == 5)
-            return null;
+        if (e.getContrats().size() == 5) return null;
 
         e.getContrats().add(ce);
 
@@ -101,5 +105,26 @@ public class EtudiantServiceImpl implements IEtudiantService {
         if (d == null) return new ArrayList<>();
 
         return etudiantRepo.findAllByDepartement(d);
+    }
+
+    @Override
+    @Transactional
+    public Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Integer idContrat, Integer idEquipe) {
+
+        if (e == null) return null;
+
+        Contrat c = contratService.retrieveContrat(idContrat);
+
+        if (c == null) return null;
+
+        Equipe eq = equipeService.retrieveEquipe(idEquipe);
+
+        if (eq == null) return null;
+
+        e.getContrats().add(c);
+
+        e.getEquipes().add(eq);
+
+        return etudiantRepo.save(e);
     }
 }
