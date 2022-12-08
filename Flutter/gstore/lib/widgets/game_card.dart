@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gstore/utils/conts.dart';
 
 import '../data/game.dart';
+import '../utils/game_setails_screen_arguments.dart';
 
 class GameCard extends StatelessWidget {
   final Game gameData;
@@ -12,7 +13,8 @@ class GameCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => Navigator.pushNamed(context, gameDetailsRoute),
+        onTap: () => Navigator.pushNamed(context, gameDetailsRoute,
+            arguments: GameDetailsScreenArguments(gameData)),
         child: Card(
             child: Flexible(
           flex: 1,
