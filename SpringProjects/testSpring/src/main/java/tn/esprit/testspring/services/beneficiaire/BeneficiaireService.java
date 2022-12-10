@@ -24,4 +24,6 @@ public interface BeneficiaireService {
     Set<Beneficiaire> getBeneficairesByType (TypeContrat typeContrat);
 
     float getMontantBf (int cinBf);
+
+    void statistiques ();
 }

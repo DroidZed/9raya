@@ -1,22 +1,23 @@
 package tn.esprit.testspring.services.beneficiaire;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.testspring.entities.*;
 import tn.esprit.testspring.repositories.AssuranceRepo;
 import tn.esprit.testspring.repositories.BeneficiaireRepo;
-import tn.esprit.testspring.repositories.ContratRepo;
 
 import java.util.*;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class BeneficiaireServiceImpl implements BeneficiaireService {
 
     private final BeneficiaireRepo beneficiaireRepo;
-    private final ContratRepo contratRepo;
     private final AssuranceRepo assuranceRepo;
 
     @Override
@@ -93,5 +94,17 @@ public class BeneficiaireServiceImpl implements BeneficiaireService {
         if (group.isEmpty()) return 0.0f;
 
         return group.stream().map(g -> g.montant * multi.get(g.typeContrat)).reduce(Float::sum).get();
+    }
+
+    @Override
+    @Scheduled(fixedRate = 60000)
+    public void statistiques() {
+
+        for (Map.Entry<Integer, Integer> entry : beneficiaireRepo
+                .getNumberOfAssurancesByCin()
+                .descendingMap()
+                .entrySet()) {
+            log.info("Cin: " + entry.getKey() + "Assurance: " + entry.getValue());
+        }
     }
 }
