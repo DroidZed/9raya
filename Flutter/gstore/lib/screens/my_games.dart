@@ -18,13 +18,13 @@ class _MyGamesScreenState extends State<MyGamesScreen> {
 
   @override
   void initState() {
-    games.add(Game("assets/dmc5.jpg", "Devil May Cry 5", 420, desc, 10));
-    games.add(Game("assets/fifa.jpg", "FIFA 2022", 320, desc, 19));
-    games.add(Game("assets/minecraft.webp", "Minecraft", 90, desc, 12));
-    games.add(Game("assets/nfs.jpg", "Need For Speed", 500, desc, 10));
-    games.add(Game("assets/rdr2.jpg", "Red Dead Redemption 2", 200, desc, 52));
-    games.add(Game("assets/re8.jpg", "Resident Evil 8", 250, desc, 12));
-    games.add(Game(
+    games.add(Game("", "assets/dmc5.jpg", "Devil May Cry 5", 420, desc, 10));
+    games.add(Game("", "assets/fifa.jpg", "FIFA 2022", 320, desc, 19));
+    games.add(Game("", "assets/minecraft.webp", "Minecraft", 90, desc, 12));
+    games.add(Game("", "assets/nfs.jpg", "Need For Speed", 500, desc, 10));
+    games.add(Game("", "assets/rdr2.jpg", "Red Dead Redemption 2", 200, desc, 52));
+    games.add(Game("", "assets/re8.jpg", "Resident Evil 8", 250, desc, 12));
+    games.add(Game("",
         "assets/skyrim.jpg", "The Elder Scrolls V - Skyrim", 160, desc, 92));
 
     super.initState();
