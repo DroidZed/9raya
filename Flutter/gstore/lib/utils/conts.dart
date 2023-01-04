@@ -1,6 +1,6 @@
 const signUpRoute = '/signup';
 const forgetPasswordRoute = '/forgetPassword';
-const home = '/home';
+const homeRoute = '/home';
 const gameDetailsRoute = '/gameDetails';
 const profileRoute = '/profile';
 const cartRoute = '/cart';

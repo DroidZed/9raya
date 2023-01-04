@@ -43,9 +43,7 @@ class _InputState extends State<Input> {
           decoration: InputDecoration(
             hintText: widget.label,
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.deepPurple,
-              ),
+              borderSide: BorderSide(color: Colors.deepPurple),
             ),
             border: const OutlineInputBorder(),
           ),

@@ -102,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onPress: () {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
-                                    Navigator.pushNamed(context, home);
+                                    Navigator.pushNamed(context, homeRoute);
                                   }
                                 },
                               ),

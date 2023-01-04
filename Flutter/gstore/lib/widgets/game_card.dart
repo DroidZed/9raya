@@ -25,7 +25,7 @@ class GameCard extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.all(10),
-                  child: Image.asset(
+                  child: Image.network(
                     gameData.imagePath,
                     height: 90,
                     width: 180,

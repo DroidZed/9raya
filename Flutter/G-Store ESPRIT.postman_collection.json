@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "3f37be11-1644-484b-a743-9d99822cbaa0",
+		"name": "G-Store ESPRIT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Reset Database",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/reset/all",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"reset",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/game",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"monem\",\r\n    \"password\": \"monem\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/user/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"user",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"gamix\",\r\n    \"email\": \"gamix@esprit.tn\",\r\n    \"password\": \"monem\",\r\n    \"birth\": 2021,\r\n    \"address\": \"GamiX at ESPRIT MOBILE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/user/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit profile",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"monem\",\r\n    \"address\": \"RO GamiX at ESPRIT MOBILE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/user/61708cdd7ea3ce4718f392a8",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"user",
+						"61708cdd7ea3ce4718f392a8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset password",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/user/pwd/monem",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"user",
+						"pwd",
+						"monem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user's games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/library/61708cdd7ea3ce4718f392a8",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"library",
+						"61708cdd7ea3ce4718f392a8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify game ownership",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/library/61708cdd7ea3ce4718f392a8/61708cdd7ea3ce4718f3929d",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"library",
+						"61708cdd7ea3ce4718f392a8",
+						"61708cdd7ea3ce4718f3929d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy a game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"61708cdd7ea3ce4718f392a8\",\r\n    \"game\": \"61708cdd7ea3ce4718f3929d\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/library",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"library"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

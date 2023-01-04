@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:gstore/utils/conts.dart';
+import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../widgets/button.dart';
 import '../widgets/input.dart';
@@ -70,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             // Navigator.pushNamed(context, home);
                             Map<String, dynamic> data = {
                               "username": _username,
-                              "mdp": _mdp
+                              "mdp": _mdp,
                             };
                             Map<String, String> headers = {
                               "Content-Type": "application/json ; charset=UTF-8"
@@ -78,9 +81,38 @@ class _SignInScreenState extends State<SignInScreen> {
                             http
                                 .post(Uri.parse("$baseUrl/user/signin"),
                                     headers: headers, body: json.encode(data))
-                                .then((http.Response response) {
+                                .then((http.Response response) async {
                               if (response.statusCode == 200) {
-                                Navigator.pushNamed(context, home);
+                                Map<String, dynamic> user =
+                                    json.decode(response.body);
+
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+
+                                prefs.setString("user", user["_id"]);
+
+                                Database db = await openDatabase(
+                                  join(await getDatabasesPath(), "gstore.db"),
+                                  version: 1,
+                                  onCreate: (Database db, int version) async {
+                                    await db.transaction((txn) => txn.execute(
+                                        "CREATE TABLE users (_id TEXT PRIMARY KEY, username TEXT, address TEXT, wallet INTEGER)"));
+                                    await db.transaction(((txn) => txn.execute(
+                                        "CREATE TABLE basket (_id TEXT PRIMARY KEY, url TEXT, price INTEGER)")));
+                                  },
+                                );
+
+                                db.insert("users", user,
+                                    conflictAlgorithm:
+                                        ConflictAlgorithm.replace);
+
+                                // select
+                                List<Map<String, dynamic>> users =
+                                    await db.query("users");
+
+                                print(users);
+
+                                Navigator.pushNamed(context, homeRoute);
                               } else {
                                 showDialog(
                                     context: context,

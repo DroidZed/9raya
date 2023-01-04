@@ -2,10 +2,7 @@ package tn.esprit.tp1.services.etudiant;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import tn.esprit.tp1.entity.Contrat;
-import tn.esprit.tp1.entity.Departement;
-import tn.esprit.tp1.entity.Equipe;
-import tn.esprit.tp1.entity.Etudiant;
+import tn.esprit.tp1.entity.*;
 import tn.esprit.tp1.exceptions.DepartementNotFoundException;
 import tn.esprit.tp1.exceptions.EtudiantNotFoundException;
 import tn.esprit.tp1.repository.EtudiantRepo;
@@ -15,7 +12,10 @@ import tn.esprit.tp1.services.equipe.EquipeServiceImpl;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -40,16 +40,14 @@ public class EtudiantServiceImpl implements IEtudiantService {
 
     @Override
     public Etudiant updateEtudiant(Etudiant e) {
-        return etudiantRepo.findById(e.getIdEtudiant())
-                .map(etudiant -> {
+        return etudiantRepo.findById(e.getIdEtudiant()).map(etudiant -> {
 
-                    etudiant.setNom(e.getNom());
-                    etudiant.setPrenom(e.getPrenom());
-                    etudiant.setOption(e.getOption());
+            etudiant.setNom(e.getNom());
+            etudiant.setPrenom(e.getPrenom());
+            etudiant.setOption(e.getOption());
 
-                    return etudiantRepo.save(etudiant);
-                })
-                .orElseThrow(() -> new EtudiantNotFoundException(e.getIdEtudiant()));
+            return etudiantRepo.save(etudiant);
+        }).orElseThrow(() -> new EtudiantNotFoundException(e.getIdEtudiant()));
     }
 
     @Override
@@ -60,8 +58,7 @@ public class EtudiantServiceImpl implements IEtudiantService {
     @Override
     public void removeEtudiant(Integer idEtudiant) {
 
-        if (!etudiantRepo.existsById(idEtudiant))
-            throw new EtudiantNotFoundException(idEtudiant);
+        if (!etudiantRepo.existsById(idEtudiant)) throw new EtudiantNotFoundException(idEtudiant);
 
         etudiantRepo.deleteById(idEtudiant);
     }
@@ -126,5 +123,38 @@ public class EtudiantServiceImpl implements IEtudiantService {
         e.getEquipes().add(eq);
 
         return etudiantRepo.save(e);
+    }
+
+    @Override
+    public Map<Option, List<Etudiant>> listEtudiantsParOption() {
+        Map<Option, List<Etudiant>> studentsByOption = new HashMap<>();
+
+        List<Etudiant> ets = etudiantRepo.findAll();
+
+        studentsByOption.put(Option.SE, ets.stream().filter(e -> e.getOption().equals(Option.SE)).collect(Collectors.toList()));
+        studentsByOption.put(Option.SIM, ets.stream().filter(e -> e.getOption().equals(Option.SIM)).collect(Collectors.toList()));
+        studentsByOption.put(Option.NIDS, ets.stream().filter(e -> e.getOption().equals(Option.NIDS)).collect(Collectors.toList()));
+        studentsByOption.put(Option.GAMIX, ets.stream().filter(e -> e.getOption().equals(Option.GAMIX)).collect(Collectors.toList()));
+
+        return studentsByOption;
+    }
+
+    @Override
+    public Map<String, Integer> countStudentsByOption(Option o) {
+        Map<String, Integer> countStudents = new HashMap<>();
+
+        countStudents.put("Count", etudiantRepo.countEtudiantsByOption(o));
+
+        return countStudents;
+    }
+
+    @Override
+    public Map<Specialite, Integer> countEtudiantsParSpecialite(Specialite s) {
+
+        Map<Specialite, Integer> countStudents = new HashMap<>();
+
+        countStudents.put(s, etudiantRepo.countEtudiantsBySpecialite(s));
+
+        return countStudents;
     }
 }

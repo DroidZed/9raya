@@ -20,7 +20,7 @@ void main() {
         profileRoute: (context) => const ProfileSettingsScreen(),
         cartRoute: (context) => const CartScreen(),
         forgetPasswordRoute: (context) => const ForgetPasswordScreen(),
-        home: (context) => const TabBarNav(),
+        homeRoute: (context) => const TabBarNav(),
         bottomNavBarRoute: (context) => const BottomNavBar(),
         gameDetailsRoute: (context) => const ExtractGameDetailsArguments(),
       },

@@ -1,0 +1,67 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="GraphQlLogement:war exploded">
+    <output-path>$PROJECT_DIR$/target/GraphQlLogement-0.0.1-SNAPSHOT</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>GraphQlLogement</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="GraphQlLogement" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-server:2.27" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-common:2.27" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.core:jersey-client:2.27" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:javax.ws.rs-api:2.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-jaxb:2.27" />
+          <element id="library" level="project" name="Maven: javax.annotation:javax.annotation-api:1.2" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:javax.inject:2.5.0-b42" />
+          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet:2.27" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.containers:jersey-container-servlet-core:2.27" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.inject:jersey-hk2:2.27" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-locator:2.5.0-b42" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2.external:aopalliance-repackaged:2.5.0-b42" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-api:2.5.0-b42" />
+          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
+          <element id="library" level="project" name="Maven: org.glassfish.hk2:hk2-utils:2.5.0-b42" />
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.22.0-CR2" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-json-jackson:2.25.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.ext:jersey-entity-filtering:2.25.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.8.4" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.8.4" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.8.4" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.4" />
+          <element id="library" level="project" name="Maven: com.graphql-java:graphql-java:3.0.0" />
+          <element id="library" level="project" name="Maven: org.antlr:antlr4-runtime:4.5.1" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.22" />
+          <element id="library" level="project" name="Maven: com.graphql-java:graphql-java-tools:3.2.0" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.1.3-2" />
+          <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.8" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-kotlin:2.8.8" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-reflect:1.1.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.8" />
+          <element id="library" level="project" name="Maven: com.esotericsoftware:reflectasm:1.11.3" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm:5.0.4" />
+          <element id="library" level="project" name="Maven: ru.vyarus:generics-resolver:2.0.1" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:21.0" />
+          <element id="library" level="project" name="Maven: com.graphql-java:graphql-java-servlet:4.0.0" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.3.1" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.4" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/GraphQlLogement-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="GraphQlLogement/web/Web" />
+    </root>
+  </artifact>
+</component>
